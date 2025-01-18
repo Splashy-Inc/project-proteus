@@ -1,13 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://cerswvdmkw2h"]
+[gd_scene load_steps=8 format=3 uid="uid://cerswvdmkw2h"]
 
+[ext_resource type="Script" path="res://SCRIPTS/playground.gd" id="1_0wkgm"]
 [ext_resource type="PackedScene" uid="uid://ccljkih7gdac1" path="res://SCENES/proteus.tscn" id="1_v6lac"]
 [ext_resource type="PackedScene" uid="uid://dq6wtxhsxms6l" path="res://SCENES/target.tscn" id="2_38x5t"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jh1m8"]
-size = Vector2(640, 64)
+size = Vector2(1280, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5heu"]
-size = Vector2(640, 64)
+size = Vector2(1280, 64)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_w2m5r"]
 size = Vector2(64, 64)
@@ -16,6 +17,7 @@ size = Vector2(64, 64)
 size = Vector2(64, 64)
 
 [node name="Playground" type="Node"]
+script = ExtResource("1_0wkgm")
 
 [node name="Proteus" parent="." instance=ExtResource("1_v6lac")]
 position = Vector2(32, 247)
@@ -49,9 +51,45 @@ texture = SubResource("PlaceholderTexture2D_w2m5r")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 shape = SubResource("RectangleShape2D_kkk45")
 
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(448, 200)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
+texture = SubResource("PlaceholderTexture2D_w2m5r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource("RectangleShape2D_kkk45")
+
 [node name="Target" parent="." instance=ExtResource("2_38x5t")]
-position = Vector2(512, 264)
+position = Vector2(704, 264)
 type = 1
+
+[node name="Target3" parent="." instance=ExtResource("2_38x5t")]
+position = Vector2(608, 264)
+type = 2
+is_obstacle = true
+
+[node name="Target4" parent="." instance=ExtResource("2_38x5t")]
+position = Vector2(448, 136)
+type = 2
+is_obstacle = true
 
 [node name="Target2" parent="." instance=ExtResource("2_38x5t")]
 position = Vector2(192, 264)
+is_obstacle = true
+
+[node name="Target5" parent="." instance=ExtResource("2_38x5t")]
+position = Vector2(96, 264)
+is_obstacle = true
+
+[node name="Target6" parent="." instance=ExtResource("2_38x5t")]
+position = Vector2(-32, 264)
+is_obstacle = true
+
+[node name="Target7" parent="." instance=ExtResource("2_38x5t")]
+position = Vector2(-160, 264)
+is_obstacle = true
+
+[node name="Target8" parent="." instance=ExtResource("2_38x5t")]
+position = Vector2(-288, 264)
+is_obstacle = true

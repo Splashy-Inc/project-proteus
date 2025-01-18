@@ -26,6 +26,10 @@ window/size/viewport_height=360
 window/size/window_width_override=1280
 window/size/window_height_override=720
 
+[global_group]
+
+targets=""
+
 [input]
 
 jump={
@@ -67,8 +71,9 @@ bludgeon={
 [layer_names]
 
 2d_physics/layer_1="Player"
-2d_physics/layer_2="PlayerAttack"
+2d_physics/layer_2="Player Attack"
 2d_physics/layer_3="Target"
+2d_physics/layer_4="Obstacle"
 
 [rendering]
 
