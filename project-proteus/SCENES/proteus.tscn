@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://ccljkih7gdac1"]
 
 [ext_resource type="Script" path="res://SCRIPTS/proteus.gd" id="1_hqlf3"]
-[ext_resource type="Texture2D" uid="uid://pmgjw412e1th" path="res://icon.svg" id="1_kcnh3"]
-[ext_resource type="PackedScene" uid="uid://caai7f6lr5i03" path="res://SCENES/attack.tscn" id="3_pj0pq"]
+[ext_resource type="Texture2D" uid="uid://cniqfersym44" path="res://ASSETS/Art/Proteus.png" id="2_m6voq"]
+[ext_resource type="PackedScene" uid="uid://b4ev43obqdirj" path="res://SCENES/attack.tscn" id="3_pj0pq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4bkf5"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_kcnh3")
+"texture": ExtResource("2_m6voq")
 }],
 "loop": true,
 "name": &"default",
@@ -19,10 +19,10 @@ animations = [{
 size = Vector2(64, 64)
 
 [node name="Proteus" type="CharacterBody2D"]
+z_index = 1
 script = ExtResource("1_hqlf3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_4bkf5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

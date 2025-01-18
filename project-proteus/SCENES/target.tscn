@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq6wtxhsxms6l"]
+
+[ext_resource type="Script" path="res://SCRIPTS/target.gd" id="1_6w474"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_aflev"]
+size = Vector2(32, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vq5n0"]
+size = Vector2(32, 64)
+
+[node name="Target" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_6w474")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_aflev")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vq5n0")

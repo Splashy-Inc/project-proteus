@@ -2,13 +2,7 @@ extends Area2D
 
 class_name Attack
 
-enum Type {
-	NONE,
-	SLASHING,
-	BLUDGEONING,
-}
-
-var type = Type.NONE
+var type = Globals.Type.NONE
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,5 +12,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func initialize(new_type: Type):
+func initialize(new_type: Globals.Type):
 	type = new_type
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is Target:
+		if body.on_hit(self):
+			print("Successful hit!")
+		else:
+			print("Failed hit...")
