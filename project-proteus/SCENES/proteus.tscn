@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://ccljkih7gdac1"]
+[gd_scene load_steps=23 format=3 uid="uid://ccljkih7gdac1"]
 
 [ext_resource type="Script" path="res://SCRIPTS/proteus.gd" id="1_hqlf3"]
-[ext_resource type="PackedScene" path="res://SCENES/attack.tscn" id="3_pj0pq"]
+[ext_resource type="PackedScene" uid="uid://b4ev43obqdirj" path="res://SCENES/attack.tscn" id="3_pj0pq"]
 [ext_resource type="Texture2D" uid="uid://c74qsqw02u7dx" path="res://ASSETS/Art/ProteusIdleSpriteSheet.png" id="3_y00dk"]
+[ext_resource type="Texture2D" uid="uid://83a156rjduqt" path="res://ASSETS/Art/ProteusRun.png" id="4_plm1m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1ip0s"]
 atlas = ExtResource("3_y00dk")
@@ -44,6 +45,30 @@ region = Rect2(512, 0, 64, 64)
 atlas = ExtResource("3_y00dk")
 region = Rect2(576, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fauit"]
+atlas = ExtResource("4_plm1m")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8u4t"]
+atlas = ExtResource("4_plm1m")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2245h"]
+atlas = ExtResource("4_plm1m")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_td33s"]
+atlas = ExtResource("4_plm1m")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnqib"]
+atlas = ExtResource("4_plm1m")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3www"]
+atlas = ExtResource("4_plm1m")
+region = Rect2(320, 0, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_kup37"]
 animations = [{
 "frames": [{
@@ -78,8 +103,36 @@ animations = [{
 "texture": SubResource("AtlasTexture_evjpn")
 }],
 "loop": true,
-"name": &"default",
+"name": &"Idle",
 "speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fauit")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8u4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2245h")
+}],
+"loop": true,
+"name": &"IdleToRun",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_td33s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnqib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3www")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_upt6q"]
@@ -92,7 +145,8 @@ attack_scene = ExtResource("3_pj0pq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kup37")
-frame_progress = 0.21057
+animation = &"IdleToRun"
+frame_progress = 0.696956
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
