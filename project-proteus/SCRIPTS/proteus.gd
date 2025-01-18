@@ -8,6 +8,8 @@ const JUMP_TIME = .5 # How long the player should take to jump
 var direction = 0.0
 var right_attack_center := Vector2.ZERO
 
+@export var attack_scene: PackedScene
+
 func _ready():
 	right_attack_center = $AttackCenter.position
 
@@ -32,14 +34,17 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.is_action_pressed("slash"):
-			_attack(Globals.Type.SLASHING)
-		elif event.is_action_pressed("bludgeon"):
-			_attack(Globals.Type.BLUDGEONING)
+	if event.is_action_pressed("slash"):
+		_attack(Globals.Type.SLASHING)
+	elif event.is_action_pressed("bludgeon"):
+		_attack(Globals.Type.BLUDGEONING)
 
 func _attack(attack_type: Globals.Type):
-	pass
+	if $AttackCenter.get_children().is_empty():
+		var new_attack = attack_scene.instantiate()
+		if new_attack is Attack:
+			$AttackCenter.add_child(new_attack)
+			new_attack.initialize(attack_type)
 
 func _set_direction(new_direction: float):
 		direction = new_direction

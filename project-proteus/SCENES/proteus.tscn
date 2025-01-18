@@ -21,6 +21,7 @@ size = Vector2(64, 64)
 [node name="Proteus" type="CharacterBody2D"]
 z_index = 1
 script = ExtResource("1_hqlf3")
+attack_scene = ExtResource("3_pj0pq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4bkf5")
@@ -30,5 +31,3 @@ shape = SubResource("RectangleShape2D_upt6q")
 
 [node name="AttackCenter" type="Marker2D" parent="."]
 position = Vector2(64, 0)
-
-[node name="Attack" parent="AttackCenter" instance=ExtResource("3_pj0pq")]

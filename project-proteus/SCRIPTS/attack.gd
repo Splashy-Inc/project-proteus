@@ -14,6 +14,8 @@ func _process(delta: float) -> void:
 
 func initialize(new_type: Globals.Type):
 	type = new_type
+	$CollisionShape2D.disabled = false
+	$Timer.start()
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Target:
@@ -21,3 +23,6 @@ func _on_body_entered(body: Node2D) -> void:
 			print("Successful hit!")
 		else:
 			print("Failed hit...")
+
+func _on_timer_timeout() -> void:
+	queue_free()

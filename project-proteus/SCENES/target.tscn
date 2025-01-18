@@ -18,3 +18,11 @@ texture = SubResource("PlaceholderTexture2D_aflev")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_vq5n0")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -32.0
+offset_right = 20.0
+offset_bottom = -9.0
+text = "None"
+horizontal_alignment = 1
