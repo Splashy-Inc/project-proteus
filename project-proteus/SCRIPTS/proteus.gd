@@ -47,7 +47,7 @@ func _attack(attack_type: Globals.Type):
 			new_attack.initialize(attack_type)
 
 func _set_direction(new_direction: float):
-		direction = new_direction
+		direction = ceil(new_direction)
 		if direction != 0:
 			$AnimatedSprite2D.flip_h = direction < 0
 			$AttackCenter.position = right_attack_center * direction
