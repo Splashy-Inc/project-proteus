@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cerswvdmkw2h"]
+[gd_scene load_steps=6 format=3 uid="uid://cerswvdmkw2h"]
 
 [ext_resource type="PackedScene" uid="uid://ccljkih7gdac1" path="res://SCENES/proteus.tscn" id="1_v6lac"]
 
@@ -7,6 +7,12 @@ size = Vector2(640, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5heu"]
 size = Vector2(640, 64)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_w2m5r"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kkk45"]
+size = Vector2(64, 64)
 
 [node name="Playground" type="Node"]
 
@@ -21,3 +27,21 @@ texture = SubResource("PlaceholderTexture2D_jh1m8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("RectangleShape2D_m5heu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(320, 264)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = SubResource("PlaceholderTexture2D_w2m5r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_kkk45")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(384, 200)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+texture = SubResource("PlaceholderTexture2D_w2m5r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_kkk45")
