@@ -20,6 +20,8 @@ size = Vector2(64, 64)
 [node name="Proteus" parent="." instance=ExtResource("1_v6lac")]
 position = Vector2(32, 247)
 
+[node name="Camera2D" type="Camera2D" parent="Proteus"]
+
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(320, 328)
 
