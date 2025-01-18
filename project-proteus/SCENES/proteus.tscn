@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccljkih7gdac1"]
+[gd_scene load_steps=6 format=3 uid="uid://ccljkih7gdac1"]
 
 [ext_resource type="Script" path="res://SCRIPTS/proteus.gd" id="1_hqlf3"]
 [ext_resource type="Texture2D" uid="uid://pmgjw412e1th" path="res://icon.svg" id="1_kcnh3"]
+[ext_resource type="PackedScene" uid="uid://caai7f6lr5i03" path="res://SCENES/attack.tscn" id="3_pj0pq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4bkf5"]
 animations = [{
@@ -26,3 +27,6 @@ sprite_frames = SubResource("SpriteFrames_4bkf5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_upt6q")
+
+[node name="Attack" parent="." instance=ExtResource("3_pj0pq")]
+position = Vector2(64, 0)

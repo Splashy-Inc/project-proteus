@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cerswvdmkw2h"]
+[gd_scene load_steps=9 format=3 uid="uid://cerswvdmkw2h"]
 
 [ext_resource type="PackedScene" uid="uid://ccljkih7gdac1" path="res://SCENES/proteus.tscn" id="1_v6lac"]
+[ext_resource type="Script" path="res://SCRIPTS/target.gd" id="2_c1rmy"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jh1m8"]
 size = Vector2(640, 64)
@@ -13,6 +14,12 @@ size = Vector2(64, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kkk45"]
 size = Vector2(64, 64)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_aflev"]
+size = Vector2(32, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vq5n0"]
+size = Vector2(32, 64)
 
 [node name="Playground" type="Node"]
 
@@ -45,3 +52,17 @@ texture = SubResource("PlaceholderTexture2D_w2m5r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 shape = SubResource("RectangleShape2D_kkk45")
+
+[node name="Target" type="Area2D" parent="."]
+position = Vector2(180, 264)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("2_c1rmy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Target"]
+texture = SubResource("PlaceholderTexture2D_aflev")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
+shape = SubResource("RectangleShape2D_vq5n0")
+
+[connection signal="area_entered" from="Target" to="Target" method="_on_area_entered"]
