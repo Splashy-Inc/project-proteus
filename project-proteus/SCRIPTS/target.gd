@@ -13,6 +13,8 @@ var default_collision_layer: int
 func _ready() -> void:
 	$Label.text = Globals.Type.keys()[type]
 	default_collision_layer = collision_layer
+	if type == Globals.Type.NONE:
+		randomize_self()
 	_update_collision_layer()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,3 +51,8 @@ func _update_collision_layer():
 	collision_layer = default_collision_layer
 	if is_obstacle:
 		collision_layer |= Globals.CollisionLayer.OBSTACLE
+		
+func randomize_self():
+	var rand_type = randi_range(Globals.Type.SLASHING, Globals.Type.BLUDGEONING)
+	var rand_obstacle = bool(randi_range(0,1))
+	initialize(rand_type, true, rand_obstacle) # Always destructible for now
