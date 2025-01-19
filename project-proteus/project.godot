@@ -74,6 +74,7 @@ bludgeon={
 2d_physics/layer_2="Player Attack"
 2d_physics/layer_3="Target"
 2d_physics/layer_4="Obstacle"
+2d_physics/layer_5="Terrain"
 
 [rendering]
 

@@ -140,7 +140,7 @@ size = Vector2(62, 63)
 
 [node name="Proteus" type="CharacterBody2D"]
 z_index = 1
-collision_mask = 9
+collision_mask = 25
 safe_margin = 1.0
 script = ExtResource("1_hqlf3")
 attack_scene = ExtResource("3_pj0pq")
