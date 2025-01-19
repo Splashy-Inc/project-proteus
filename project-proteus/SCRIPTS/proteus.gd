@@ -31,6 +31,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
+	if velocity.x == 0:
+		$AnimatedSprite2D.play("Idle")
+	elif is_on_floor():
+		$AnimatedSprite2D.play("Run")
+	
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
