@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://SCRIPTS/target.gd" id="1_6w474"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_aflev"]
-size = Vector2(32, 64)
+size = Vector2(64, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vq5n0"]
-size = Vector2(32, 64)
+size = Vector2(64, 64)
 
 [node name="Target" type="StaticBody2D" groups=["targets"]]
 collision_layer = 4

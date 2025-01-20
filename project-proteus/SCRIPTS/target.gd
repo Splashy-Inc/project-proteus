@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 func on_hit(attack: Attack):
 	if attack.type == type:
 		if is_destructible:
-			_die()
+			call_deferred("_die")
 		else:
 			print(self, " hit")
 		return true
@@ -55,4 +55,4 @@ func _update_collision_layer():
 func randomize_self():
 	var rand_type = randi_range(Globals.Type.SLASHING, Globals.Type.BLUDGEONING)
 	var rand_obstacle = bool(randi_range(0,1))
-	initialize(rand_type, true, rand_obstacle) # Always destructible for now
+	initialize(rand_type, true, true) # Always destructible obstacle for now
