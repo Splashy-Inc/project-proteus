@@ -13,6 +13,15 @@ enum CollisionLayer {
 	OBSTACLE,
 }
 
+var level_column_data_struct = {
+	"is_start_column": false,
+	"bottom_tile": Vector2i.ZERO,
+	"height": 0,
+	"num_obstacles": 2,
+}
+
+const PLAYER_JUMP_HEIGHT = 128
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

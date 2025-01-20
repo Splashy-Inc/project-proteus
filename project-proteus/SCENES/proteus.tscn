@@ -136,7 +136,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_upt6q"]
-size = Vector2(62, 63)
+size = Vector2(54, 63)
 
 [node name="Proteus" type="CharacterBody2D"]
 z_index = 1
@@ -147,9 +147,7 @@ attack_scene = ExtResource("3_pj0pq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kup37")
-animation = &"Run"
-frame = 2
-frame_progress = 0.318762
+animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_upt6q")
