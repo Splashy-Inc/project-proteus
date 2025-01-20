@@ -136,20 +136,22 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_upt6q"]
-size = Vector2(64, 64)
+size = Vector2(62, 63)
 
 [node name="Proteus" type="CharacterBody2D"]
 z_index = 1
+collision_mask = 25
+safe_margin = 1.0
 script = ExtResource("1_hqlf3")
 attack_scene = ExtResource("3_pj0pq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kup37")
-animation = &"IdleToRun"
-frame_progress = 0.696956
+animation = &"Run"
+frame = 2
+frame_progress = 0.318762
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_upt6q")
 
 [node name="AttackCenter" type="Marker2D" parent="."]

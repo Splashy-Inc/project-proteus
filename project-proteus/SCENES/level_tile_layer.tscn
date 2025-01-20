@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://bjlgecas87uqo"]
+
+[ext_resource type="PackedScene" uid="uid://dq6wtxhsxms6l" path="res://SCENES/target.tscn" id="1_agv1n"]
+[ext_resource type="Texture2D" uid="uid://kux0kdqot82n" path="res://ASSETS/Art/Tiles/placeholder_terrain.png" id="2_wwuq7"]
+[ext_resource type="Script" path="res://SCRIPTS/level_tile_layer.gd" id="3_vjn0j"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_behkq"]
+resource_name = "Targets"
+scenes/1/scene = ExtResource("1_agv1n")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_marmu"]
+texture = ExtResource("2_wwuq7")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 32, -32, -32, 32, -32, 32, 32)
+
+[sub_resource type="TileSet" id="TileSet_sfamw"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 16
+physics_layer_0/collision_mask = 0
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0, 0.345098, 0, 1)
+sources/3 = SubResource("TileSetAtlasSource_marmu")
+sources/2 = SubResource("TileSetScenesCollectionSource_behkq")
+
+[node name="LevelTileLayer" type="TileMapLayer"]
+tile_set = SubResource("TileSet_sfamw")
+script = ExtResource("3_vjn0j")
