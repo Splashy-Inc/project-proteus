@@ -50,7 +50,16 @@ func generate_section(top_left: Vector2i, bottom_right: Vector2i, avg_tiles_per_
 		if x == 0:
 			column_data["is_start_column"] = true
 			start_position = to_global(map_to_local(prev_path_cell))
-	set_cells_terrain_connect(get_used_cells_by_id(1),0,0,false)
+		
+	var section_rect = Rect2i(origin, size)
+	var section_cells = []
+	for x in section_rect.size.x:
+		for y in section_rect.size.y:
+			var new_cell = Vector2i(section_rect.position) + Vector2i(x,y)
+			if get_cell_source_id(new_cell) == 1:
+				section_cells.append(new_cell)
+	set_cells_terrain_connect(section_cells,0,0,false)
+	#set_cells_terrain_connect(get_used_cells_by_id(1),0,0,false)
 	next_top_left = Vector2i(bottom_right.x, next_top_left.y)
 	latest_path_cell = prev_path_cell
 	return start_position
