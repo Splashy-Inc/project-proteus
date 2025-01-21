@@ -41,6 +41,7 @@ func generate_section(top_left: Vector2i, bottom_right: Vector2i, avg_tiles_per_
 			start_position = to_global(map_to_local(prev_path_cell))
 		else:
 			prev_path_cell = generate_column(column_data, prev_path_cell)
+	set_cells_terrain_connect(get_used_cells_by_id(1),0,0,false)
 	return start_position
 
 func generate_column(column_data: Dictionary, prev_path_cell) -> Vector2i:
@@ -62,7 +63,7 @@ func generate_column(column_data: Dictionary, prev_path_cell) -> Vector2i:
 		
 		# Fill terrain tiles under path cell
 		if cur_cell.y > path_cell.y:
-			set_cell(cur_cell,0,Vector2i(0,0))
+			set_cell(cur_cell,1,Vector2i(0,11))
 			
 		# Place an obstacle in the path cell if terrain height between path cells increased by max jump height
 		#   Only place if we have obstacles we can place
