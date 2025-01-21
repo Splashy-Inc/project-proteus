@@ -50,7 +50,8 @@ func generate_section(top_left: Vector2i, bottom_right: Vector2i, avg_tiles_per_
 		if x == 0:
 			column_data["is_start_column"] = true
 			start_position = to_global(map_to_local(prev_path_cell))
-		
+	
+	# TODO: Figure out how to avoid process spike when updating autotiler
 	var section_rect = Rect2i(origin, size)
 	var section_cells = []
 	for x in section_rect.size.x:
