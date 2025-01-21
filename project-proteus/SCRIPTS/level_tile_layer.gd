@@ -32,7 +32,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if camera and generate_random:
 		var camera_tile = local_to_map(to_local(camera.global_position))
-		if camera_tile.x  > next_top_left.x - tiles_per_window.x * 2:
+		if camera_tile.x > next_top_left.x - tiles_per_window.x * 2:
 			generate_section(next_top_left, next_top_left + tiles_per_window, tiles_per_obstacle, latest_path_cell)
 
 func generate_section(top_left: Vector2i, bottom_right: Vector2i, avg_tiles_per_obstacle: int, prev_path_cell: Vector2i):
