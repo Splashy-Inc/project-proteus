@@ -28,7 +28,7 @@ func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 
 func _physics_process(delta: float) -> void:
-		# Add the gravity.
+	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() / JUMP_TIME * delta
 		
@@ -60,7 +60,7 @@ func _move_state(delta: float):
 		state_machine.travel("idle")
 	elif is_on_floor():
 		state_machine.travel("run")
-		
+	
 	move_and_slide()
 	
 func _attack_state():
