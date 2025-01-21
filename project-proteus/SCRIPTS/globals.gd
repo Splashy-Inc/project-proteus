@@ -20,7 +20,8 @@ var level_column_data_struct = {
 	"num_obstacles": 2,
 }
 
-const PLAYER_JUMP_HEIGHT = 128
+const TILE_SIZE = Vector2(64,64)
+const PLAYER_JUMP_HEIGHT = TILE_SIZE.y * 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
