@@ -21,6 +21,8 @@ func _spawn_player(spawn_point: Vector2):
 	new_player.global_position = spawn_point
 	camera.reparent(new_player,false)
 	camera.position = Vector2.ZERO
+	if $Proteus:
+		$Proteus.queue_free()
 
 func _on_level_tile_layer_ready() -> void:
 	if $LevelTileLayer.generate_random:
