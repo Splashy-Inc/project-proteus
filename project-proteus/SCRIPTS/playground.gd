@@ -6,9 +6,9 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$LevelTileLayer.clear()
-	var spawn_point = $LevelTileLayer.generate_section(Vector2i.ZERO, Vector2i(1000,max_height_tiles), 5)
-	_spawn_player(spawn_point)
+	#$LevelTileLayer.clear()
+	#var spawn_point = $LevelTileLayer.generate_section(Vector2i.ZERO, Vector2i(1000,max_height_tiles), 5)
+	#_spawn_player(spawn_point)
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
