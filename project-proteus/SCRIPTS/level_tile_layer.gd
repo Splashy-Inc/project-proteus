@@ -10,6 +10,7 @@ var window_size: Vector2i
 var tiles_per_window: Vector2i
 var tiles_per_obstacle = 5
 var latest_path_cell: Vector2i
+var sections := []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,6 +18,8 @@ func _ready() -> void:
 	window_size = Vector2i(get_viewport().get_visible_rect().size)
 	tiles_per_window = Vector2i(window_size/base_tile_size)
 	player_jump_tiles = floor(Globals.PLAYER_JUMP_HEIGHT/tile_set.tile_size.y)
+	$SectionDeleteTimer.wait_time = tiles_per_window.x/2
+	$SectionDeleteTimer.start()
 	
 	if seed:
 		seed(seed.hash())
@@ -60,9 +63,9 @@ func generate_section(top_left: Vector2i, bottom_right: Vector2i, avg_tiles_per_
 			if get_cell_source_id(new_cell) == 1:
 				section_cells.append(new_cell)
 	set_cells_terrain_connect(section_cells,0,0,false)
-	#set_cells_terrain_connect(get_used_cells_by_id(1),0,0,false)
 	next_top_left = Vector2i(bottom_right.x, next_top_left.y)
 	latest_path_cell = prev_path_cell
+	sections.append([top_left,bottom_right])
 	return start_position
 
 func generate_column(column_data: Dictionary, prev_path_cell) -> Vector2i:
@@ -93,3 +96,13 @@ func generate_column(column_data: Dictionary, prev_path_cell) -> Vector2i:
 				set_cell(cur_cell,2,Vector2i(0,0),1)
 			
 	return path_cell
+	
+func delete_section(top_left: Vector2i, bottom_right: Vector2i):
+	for x in range(top_left.x, bottom_right.x+1):
+		for y in range(top_left.y, bottom_right.y+1):
+			erase_cell(Vector2i(x, y))
+
+func _on_section_delete_timer_timeout() -> void:
+	if not sections.is_empty():
+		var section_to_delete = sections.pop_front()
+		delete_section(section_to_delete[0], section_to_delete[1])
