@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+const SPEED = Globals.TILE_SIZE.x * 4
 const JUMP_TIME = .5 # How long the player should take to jump
 
 var direction = 0.0

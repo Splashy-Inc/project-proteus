@@ -834,3 +834,7 @@ sources/1 = SubResource("TileSetAtlasSource_0icix")
 [node name="LevelTileLayer" type="TileMapLayer"]
 tile_set = SubResource("TileSet_sfamw")
 script = ExtResource("3_vjn0j")
+
+[node name="SectionDeleteTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="SectionDeleteTimer" to="." method="_on_section_delete_timer_timeout"]
