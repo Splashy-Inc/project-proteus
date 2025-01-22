@@ -64,13 +64,16 @@ func _move_state(delta: float):
 	move_and_slide()
 	
 func _attack_state():
-	state_machine.travel("hammer_attack")
+	match attack_type:
+		Globals.Type.SLASHING:
+			state_machine.travel("sword_attack")
+		Globals.Type.BLUDGEONING:
+			state_machine.travel("hammer_attack")
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("slash"):
 		attack_type = Globals.Type.SLASHING
 		state = State.ATTACKING
-		_attack()
 	elif event.is_action_pressed("bludgeon"):
 		attack_type = Globals.Type.BLUDGEONING
 		state = State.ATTACKING
