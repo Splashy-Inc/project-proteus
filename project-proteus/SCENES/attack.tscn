@@ -18,6 +18,7 @@ collision_mask = 4
 script = ExtResource("1_tnjsr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = SubResource("GradientTexture2D_pctrq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
