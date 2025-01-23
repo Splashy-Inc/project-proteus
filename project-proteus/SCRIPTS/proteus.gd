@@ -10,6 +10,7 @@ enum State {
 	IDLE,
 	MOVING,
 	ATTACKING,
+	LAUNCHING,
 }
 
 var state: State
@@ -28,6 +29,11 @@ func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 
 func _physics_process(delta: float) -> void:
+	$ProgressBar.value = $CannonCooldown.wait_time - $CannonCooldown.time_left
+	if $ProgressBar.value < $CannonCooldown.wait_time:
+		$ProgressBar.show()
+	else:
+		$ProgressBar.hide()
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() / JUMP_TIME * delta
@@ -40,6 +46,9 @@ func _physics_process(delta: float) -> void:
 		State.ATTACKING:
 			_move_state(delta)
 			_attack_state()
+		State.LAUNCHING:
+			_move_state(delta)
+			_launch_state()
 
 	
 func _move_state(delta: float):
@@ -69,6 +78,16 @@ func _attack_state():
 			state_machine.travel("sword_attack")
 		Globals.Type.BLUDGEONING:
 			state_machine.travel("hammer_attack")
+			
+func _launch_state():
+	state_machine.travel("cannon_jump")
+
+func cannon_jump():
+	# Give an impule that resolves over JUMP_TIME and peak at JUMP_HEIGHT based on current gravity
+	# Twice the distance of a normal jump, but has a cooldown
+	velocity.y = -sqrt(4 * Globals.PLAYER_JUMP_HEIGHT * get_gravity().y / JUMP_TIME)
+	$CannonCooldown.start()
+	state = State.IDLE
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("slash"):
@@ -77,7 +96,9 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("bludgeon"):
 		attack_type = Globals.Type.BLUDGEONING
 		state = State.ATTACKING
-
+	elif event.is_action_pressed("launch"):
+		if $CannonCooldown.is_stopped():
+			state = State.LAUNCHING
 func _attack():
 	if $AttackCenter.get_children().is_empty():
 		var new_attack = attack_scene.instantiate()

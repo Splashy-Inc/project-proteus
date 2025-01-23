@@ -1,11 +1,49 @@
-[gd_scene load_steps=93 format=3 uid="uid://ccljkih7gdac1"]
+[gd_scene load_steps=127 format=3 uid="uid://ccljkih7gdac1"]
 
 [ext_resource type="Script" path="res://SCRIPTS/proteus.gd" id="1_hqlf3"]
+[ext_resource type="Texture2D" uid="uid://bjb8uavvr2f0t" path="res://ASSETS/Art/CanonSpriteSheet.png" id="3_mxpx7"]
 [ext_resource type="PackedScene" uid="uid://b4ev43obqdirj" path="res://SCENES/attack.tscn" id="3_pj0pq"]
 [ext_resource type="Texture2D" uid="uid://c74qsqw02u7dx" path="res://ASSETS/Art/ProteusIdleSpriteSheet.png" id="3_y00dk"]
 [ext_resource type="Texture2D" uid="uid://83a156rjduqt" path="res://ASSETS/Art/ProteusRun.png" id="4_plm1m"]
 [ext_resource type="Texture2D" uid="uid://cb2b3o2xadjqi" path="res://ASSETS/Art/HammerSpriteSheet.png" id="5_gfc4l"]
 [ext_resource type="Texture2D" uid="uid://0aryiygx2nu0" path="res://ASSETS/Art/SwordSpriteSheet.png" id="6_k2ksf"]
+[ext_resource type="Texture2D" uid="uid://ovvhvqswv0lb" path="res://ASSETS/cannon_icon.tres" id="8_5ijmw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqoao"]
+atlas = ExtResource("3_mxpx7")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xuex"]
+atlas = ExtResource("3_mxpx7")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0sei"]
+atlas = ExtResource("3_mxpx7")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86dva"]
+atlas = ExtResource("3_mxpx7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lyv7"]
+atlas = ExtResource("3_mxpx7")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51u5b"]
+atlas = ExtResource("3_mxpx7")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07csw"]
+atlas = ExtResource("3_mxpx7")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxox1"]
+atlas = ExtResource("3_mxpx7")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8agu"]
+atlas = ExtResource("3_mxpx7")
+region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ttls"]
 atlas = ExtResource("5_gfc4l")
@@ -121,6 +159,52 @@ region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kup37"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqoao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xuex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xuex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xuex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xuex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0sei")
+}],
+"loop": false,
+"name": &"CannonFire",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86dva")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lyv7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51u5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07csw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxox1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8agu")
+}],
+"loop": false,
+"name": &"CannonTransform",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6ttls")
@@ -837,9 +921,205 @@ tracks/2/keys = {
 "values": [0.0, -1.5708]
 }
 
+[sub_resource type="Animation" id="Animation_0j341"]
+resource_name = "cannon_transform_right"
+length = 0.250004
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"CannonTransform"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 2
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0416667, 0.0833333, 0.125, 0.166667, 0.208333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.785398]
+}
+
+[sub_resource type="Animation" id="Animation_dgojy"]
+resource_name = "cannon_transform_left"
+length = 0.250004
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"CannonTransform"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 2
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0416667, 0.0833333, 0.125, 0.166667, 0.208333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.785398]
+}
+
+[sub_resource type="Animation" id="Animation_5scr0"]
+resource_name = "cannon_fire_right"
+length = 0.250004
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"CannonFire"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 2
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0416667, 0.0833333, 0.125, 0.166667, 0.208333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.785398, -0.785398]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0416667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"cannon_jump"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_bmoes"]
+resource_name = "cannon_fire_left"
+length = 0.250004
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"CannonFire"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 2
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0416667, 0.0833333, 0.125, 0.166667, 0.208333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.785398, 0.785398]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0416667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"cannon_jump"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6r343"]
 _data = {
 "RESET": SubResource("Animation_pu1e6"),
+"cannon_fire_left": SubResource("Animation_bmoes"),
+"cannon_fire_right": SubResource("Animation_5scr0"),
+"cannon_transform_left": SubResource("Animation_dgojy"),
+"cannon_transform_right": SubResource("Animation_0j341"),
 "hammer_attack_left": SubResource("Animation_5cwxf"),
 "hammer_attack_right": SubResource("Animation_eegvt"),
 "hammer_transform_left": SubResource("Animation_v5aru"),
@@ -851,6 +1131,73 @@ _data = {
 "sword_transform_left": SubResource("Animation_tafkv"),
 "sword_transform_right": SubResource("Animation_cg6i8")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5io0d"]
+animation = &"cannon_fire_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3iec8"]
+animation = &"cannon_fire_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bt4nw"]
+animation = &"cannon_transform_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pc2wh"]
+animation = &"cannon_transform_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ihpnm"]
+animation = &"cannon_transform_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_chw3t"]
+animation = &"cannon_transform_right"
+play_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ybkno"]
+advance_mode = 2
+advance_expression = "not sprite.flip_h"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l21bg"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_udvb8"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_02oyj"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uco73"]
+advance_mode = 2
+advance_expression = "sprite.flip_h"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p6pti"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rvhdh"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qdymg"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3kk4f"]
+states/End/position = Vector2(1105, 100)
+states/cannon_fire_left/node = SubResource("AnimationNodeAnimation_5io0d")
+states/cannon_fire_left/position = Vector2(587, 140)
+states/cannon_fire_right/node = SubResource("AnimationNodeAnimation_3iec8")
+states/cannon_fire_right/position = Vector2(587, 35)
+states/cannon_transform_left/node = SubResource("AnimationNodeAnimation_bt4nw")
+states/cannon_transform_left/position = Vector2(380, 140)
+states/cannon_transform_left_back/node = SubResource("AnimationNodeAnimation_pc2wh")
+states/cannon_transform_left_back/position = Vector2(809, 140)
+states/cannon_transform_right/node = SubResource("AnimationNodeAnimation_ihpnm")
+states/cannon_transform_right/position = Vector2(380, 35)
+states/cannon_transform_right_back/node = SubResource("AnimationNodeAnimation_chw3t")
+states/cannon_transform_right_back/position = Vector2(809, 35)
+transitions = ["Start", "cannon_transform_right", SubResource("AnimationNodeStateMachineTransition_ybkno"), "cannon_transform_right", "cannon_fire_right", SubResource("AnimationNodeStateMachineTransition_l21bg"), "cannon_fire_right", "cannon_transform_right_back", SubResource("AnimationNodeStateMachineTransition_udvb8"), "cannon_transform_right_back", "End", SubResource("AnimationNodeStateMachineTransition_02oyj"), "Start", "cannon_transform_left", SubResource("AnimationNodeStateMachineTransition_uco73"), "cannon_transform_left", "cannon_fire_left", SubResource("AnimationNodeStateMachineTransition_p6pti"), "cannon_fire_left", "cannon_transform_left_back", SubResource("AnimationNodeStateMachineTransition_rvhdh"), "cannon_transform_left_back", "End", SubResource("AnimationNodeStateMachineTransition_qdymg")]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5mjkb"]
 animation = &"hammer_attack_left"
@@ -1027,8 +1374,22 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b2s4e"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x53ih"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6gkrf"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gqm8m"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_k41y6"]
 states/Start/position = Vector2(186, 129.656)
+states/cannon_jump/node = SubResource("AnimationNodeStateMachine_3kk4f")
+states/cannon_jump/position = Vector2(673, -45.246)
 states/hammer_attack/node = SubResource("AnimationNodeStateMachine_1egdg")
 states/hammer_attack/position = Vector2(400, -15.3443)
 states/idle/node = SubResource("AnimationNodeAnimation_3emqk")
@@ -1037,8 +1398,8 @@ states/run/node = SubResource("AnimationNodeAnimation_d3bb7")
 states/run/position = Vector2(506, 129.656)
 states/sword_attack/node = SubResource("AnimationNodeStateMachine_fcfkx")
 states/sword_attack/position = Vector2(400, 251.656)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_awvn1"), "idle", "hammer_attack", SubResource("AnimationNodeStateMachineTransition_1ku0c"), "hammer_attack", "idle", SubResource("AnimationNodeStateMachineTransition_txawf"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_r8n0u"), "run", "hammer_attack", SubResource("AnimationNodeStateMachineTransition_s8c8m"), "hammer_attack", "run", SubResource("AnimationNodeStateMachineTransition_bsq5u"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_hr06c"), "idle", "sword_attack", SubResource("AnimationNodeStateMachineTransition_bocxi"), "sword_attack", "idle", SubResource("AnimationNodeStateMachineTransition_btdh5"), "run", "sword_attack", SubResource("AnimationNodeStateMachineTransition_i044j"), "sword_attack", "run", SubResource("AnimationNodeStateMachineTransition_6ocse")]
-graph_offset = Vector2(0, -105.978)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_awvn1"), "idle", "hammer_attack", SubResource("AnimationNodeStateMachineTransition_1ku0c"), "hammer_attack", "idle", SubResource("AnimationNodeStateMachineTransition_txawf"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_r8n0u"), "run", "hammer_attack", SubResource("AnimationNodeStateMachineTransition_s8c8m"), "hammer_attack", "run", SubResource("AnimationNodeStateMachineTransition_bsq5u"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_hr06c"), "idle", "sword_attack", SubResource("AnimationNodeStateMachineTransition_bocxi"), "sword_attack", "idle", SubResource("AnimationNodeStateMachineTransition_btdh5"), "run", "sword_attack", SubResource("AnimationNodeStateMachineTransition_i044j"), "sword_attack", "run", SubResource("AnimationNodeStateMachineTransition_6ocse"), "idle", "cannon_jump", SubResource("AnimationNodeStateMachineTransition_b2s4e"), "cannon_jump", "idle", SubResource("AnimationNodeStateMachineTransition_x53ih"), "run", "cannon_jump", SubResource("AnimationNodeStateMachineTransition_6gkrf"), "cannon_jump", "run", SubResource("AnimationNodeStateMachineTransition_gqm8m")]
+graph_offset = Vector2(0, -99.8796)
 
 [node name="Proteus" type="CharacterBody2D"]
 z_index = 1
@@ -1068,3 +1429,19 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_k41y6")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="CannonCooldown" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="ProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -13.0
+offset_top = -64.0
+offset_right = 51.0
+scale = Vector2(0.4, 0.4)
+max_value = 5.0
+step = 0.01
+fill_mode = 4
+texture_under = ExtResource("8_5ijmw")
+texture_progress = ExtResource("8_5ijmw")
+tint_under = Color(0, 0, 0, 1)

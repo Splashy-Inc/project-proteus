@@ -1,0 +1,8 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://ovvhvqswv0lb"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o8fqd"]
+load_path = "res://.godot/imported/CanonSpriteSheet.png-bee63de52119f8de565168a4e40b00bf.ctex"
+
+[resource]
+atlas = SubResource("CompressedTexture2D_o8fqd")
+region = Rect2(320, 0, 64, 64)
