@@ -45,7 +45,8 @@ func update_configuration():
 	_update_collision_layer()
 	if is_obstacle:
 		is_destructible = true
-	$Label.text = Globals.Type.keys()[type]
+	if $Label:
+		$Label.text = Globals.Type.keys()[type]
 	
 func _update_collision_layer():
 	collision_layer = default_collision_layer

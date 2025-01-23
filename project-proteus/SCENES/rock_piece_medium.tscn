@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://behu2yajsvb4s"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://cmtm4181fhsbo" path="res://rock_physics_material.tres" id="1_70a1d"]
+[ext_resource type="Texture2D" uid="uid://cxtgbh56j8i0k" path="res://ASSETS/Art/Objects/Rock/RockTop.png" id="1_djjbs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4bsr"]
+atlas = ExtResource("1_djjbs")
+region = Rect2(0, 0, 64, 18)
+
+[node name="RockPieceMedium" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 16
+physics_material_override = ExtResource("1_70a1d")
+freeze = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_g4bsr")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(20, -9, 20, -8, -5, -8, -5, -7, -11, -7, -11, -8, -16, -8, -16, -7, -17, -7, -17, -8, -22, -8, -22, -7, -23, -7, -23, -6, -27, -6, -27, -5, -28, -5, -28, -4, -29, -4, -29, -3, -30, -3, -30, -2, -31, -2, -31, -1, -32, -1, -32, 4, -31, 4, -31, 5, -30, 5, -30, 6, -29, 6, -29, 7, -28, 7, -28, 8, -27, 8, -27, 9, 29, 9, 29, 8, 30, 8, 30, 7, 31, 7, 31, 6, 32, 6, 32, -1, 31, -1, 31, -2, 30, -2, 30, -4, 29, -4, 29, -5, 28, -5, 28, -6, 27, -6, 27, -7, 26, -7, 26, -8, 25, -8, 25, -9)

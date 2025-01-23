@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+class_name Player
 
 const SPEED = Globals.TILE_SIZE.x * 4
 const JUMP_TIME = .5 # How long the player should take to jump
