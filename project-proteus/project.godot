@@ -30,6 +30,7 @@ window/stretch/scale_mode="integer"
 [global_group]
 
 targets=""
+player=""
 
 [input]
 

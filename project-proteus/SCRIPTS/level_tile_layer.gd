@@ -93,7 +93,7 @@ func generate_column(column_data: Dictionary, prev_path_cell) -> Vector2i:
 		#   Only place if we have obstacles we can place
 		elif prev_path_cell and cur_cell == path_cell and column_data["num_obstacles"] > 0:
 			if prev_path_cell.y == cur_cell.y + player_jump_tiles:
-				set_cell(cur_cell,2,Vector2i(0,0),1)
+				set_cell(cur_cell,2,Vector2i(0,0),randi_range(1,2))
 			
 	return path_cell
 	
