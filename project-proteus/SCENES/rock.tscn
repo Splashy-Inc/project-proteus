@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://bcolnqwarq5ka"]
+
+[ext_resource type="Script" path="res://SCENES/rock.gd" id="1_xvjfp"]
+[ext_resource type="PackedScene" uid="uid://xhxoredhcxxs" path="res://SCENES/rock_piece_large.tscn" id="2_m7jcw"]
+[ext_resource type="PackedScene" uid="uid://behu2yajsvb4s" path="res://SCENES/rock_piece_medium.tscn" id="3_4x1pb"]
+[ext_resource type="PackedScene" uid="uid://bcwxgpi3rrkyk" path="res://SCENES/rock_piece_small.tscn" id="4_8tp8b"]
+[ext_resource type="PackedScene" uid="uid://cpm4fupv2j1j3" path="res://SCENES/moss_piece_large.tscn" id="5_erjvg"]
+[ext_resource type="PackedScene" uid="uid://c4qjubsvqexrv" path="res://SCENES/moss_piece_medium.tscn" id="6_5vn20"]
+[ext_resource type="PackedScene" uid="uid://cbqqt0cf5uipc" path="res://SCENES/moss_piece_small.tscn" id="7_1wteb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvm7j"]
+size = Vector2(64, 64)
+
+[node name="Rock" type="StaticBody2D"]
+collision_layer = 12
+collision_mask = 0
+script = ExtResource("1_xvjfp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gvm7j")
+
+[node name="Pieces" type="Node2D" parent="."]
+
+[node name="RockPieceLarge" parent="Pieces" instance=ExtResource("2_m7jcw")]
+position = Vector2(-13, 9)
+
+[node name="RockPieceMedium" parent="Pieces" instance=ExtResource("3_4x1pb")]
+position = Vector2(0, -23)
+
+[node name="RockPieceSmall" parent="Pieces" instance=ExtResource("4_8tp8b")]
+position = Vector2(20, 9)
+
+[node name="MossPieceLarge" parent="Pieces" instance=ExtResource("5_erjvg")]
+position = Vector2(-13, -10)
+
+[node name="MossPieceMedium" parent="Pieces" instance=ExtResource("6_5vn20")]
+position = Vector2(0, -26)
+
+[node name="MossPieceSmall" parent="Pieces" instance=ExtResource("7_1wteb")]
+position = Vector2(19, -10)

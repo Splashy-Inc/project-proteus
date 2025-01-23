@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpm4fupv2j1j3"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://cmtm4181fhsbo" path="res://rock_physics_material.tres" id="1_uompm"]
+[ext_resource type="Texture2D" uid="uid://dalnj1y0wfqmg" path="res://ASSETS/Art/Objects/Rock/RockMossLeft.png" id="2_bnx4s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18fu0"]
+atlas = ExtResource("2_bnx4s")
+region = Rect2(1, 18, 37, 9)
+
+[node name="MossPieceLarge" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 16
+physics_material_override = ExtResource("1_uompm")
+freeze = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_18fu0")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-15.5, -4.5, -15.5, -3.5, -17.5, -3.5, -17.5, -1.5, -18.5, -1.5, -18.5, 1.5, -17.5, 1.5, -17.5, 3.5, -15.5, 3.5, -15.5, 4.5, -12.5, 4.5, -12.5, 3.5, -10.5, 3.5, -10.5, 2.5, -9.5, 2.5, -9.5, 1.5, -4.5, 1.5, -4.5, 0.5, 4.5, 0.5, 4.5, 1.5, 5.5, 1.5, 5.5, 3.5, 7.5, 3.5, 7.5, 4.5, 10.5, 4.5, 10.5, 3.5, 12.5, 3.5, 12.5, 2.5, 14.5, 2.5, 14.5, 3.5, 18.5, 3.5, 18.5, -1.5, 17.5, -1.5, 17.5, -2.5, 16.5, -2.5, 16.5, -3.5, 10.5, -3.5, 10.5, -4.5)
