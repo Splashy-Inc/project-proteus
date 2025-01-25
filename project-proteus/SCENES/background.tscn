@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://bq05ycfbgipjt"]
+
+[ext_resource type="Texture2D" uid="uid://blf72y5l7bfdl" path="res://ASSETS/Art/Background/BackGroundLayer1.png" id="1_3kgct"]
+[ext_resource type="Texture2D" uid="uid://dr57cgl1102tc" path="res://ASSETS/Art/Background/BackGroundLayer2.png" id="2_myqld"]
+[ext_resource type="Texture2D" uid="uid://cyti6cefq4h14" path="res://ASSETS/Art/Background/BackGroundLayer3.png" id="3_eetdq"]
+[ext_resource type="Texture2D" uid="uid://ckkvn6j5f7i30" path="res://ASSETS/Art/Background/BackGroundLayer4.png" id="4_ckvpa"]
+[ext_resource type="Texture2D" uid="uid://ng0h60tu1rvo" path="res://ASSETS/Art/Background/BackGroundLayer5.png" id="5_umm5s"]
+[ext_resource type="Texture2D" uid="uid://dbw2w5s0dsrc7" path="res://ASSETS/Art/Background/BackGroundLayer6.png" id="6_rtocl"]
+
+[node name="Background" type="Node2D"]
+
+[node name="Back" type="Parallax2D" parent="."]
+scroll_offset = Vector2(0, 360)
+repeat_size = Vector2(2560, 800)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Back"]
+texture = ExtResource("1_3kgct")
+
+[node name="BackMiddle" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.25, 0.25)
+repeat_size = Vector2(2560, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="BackMiddle"]
+texture = ExtResource("2_myqld")
+offset = Vector2(0, 360)
+
+[node name="Middle" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(2560, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Middle"]
+texture = ExtResource("3_eetdq")
+offset = Vector2(0, 360)
+
+[node name="FrontMiddle" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.75, 0.75)
+repeat_size = Vector2(2560, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="FrontMiddle"]
+texture = ExtResource("4_ckvpa")
+offset = Vector2(0, 360)
+
+[node name="Front" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.9, 0.9)
+repeat_size = Vector2(2560, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Front"]
+texture = ExtResource("5_umm5s")
+
+[node name="Dirt" type="Parallax2D" parent="."]
+scroll_offset = Vector2(0, 1343)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Dirt"]
+texture = ExtResource("6_rtocl")
