@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://bcolnqwarq5ka"]
 
-[ext_resource type="Script" path="res://SCENES/rock.gd" id="1_xvjfp"]
-[ext_resource type="PackedScene" uid="uid://xhxoredhcxxs" path="res://SCENES/rock_piece_large.tscn" id="2_m7jcw"]
-[ext_resource type="PackedScene" uid="uid://behu2yajsvb4s" path="res://SCENES/rock_piece_medium.tscn" id="3_4x1pb"]
-[ext_resource type="PackedScene" uid="uid://bcwxgpi3rrkyk" path="res://SCENES/rock_piece_small.tscn" id="4_8tp8b"]
-[ext_resource type="PackedScene" uid="uid://cpm4fupv2j1j3" path="res://SCENES/moss_piece_large.tscn" id="5_erjvg"]
-[ext_resource type="PackedScene" uid="uid://c4qjubsvqexrv" path="res://SCENES/moss_piece_medium.tscn" id="6_5vn20"]
-[ext_resource type="PackedScene" uid="uid://cbqqt0cf5uipc" path="res://SCENES/moss_piece_small.tscn" id="7_1wteb"]
+[ext_resource type="Script" path="res://SCRIPTS/rock.gd" id="1_xvjfp"]
+[ext_resource type="PackedScene" uid="uid://r3h62yumeae" path="res://SCENES/rock/rock_piece_large.tscn" id="2_m7jcw"]
+[ext_resource type="PackedScene" uid="uid://behu2yajsvb4s" path="res://SCENES/rock/rock_piece_medium.tscn" id="3_4x1pb"]
+[ext_resource type="PackedScene" uid="uid://bcwxgpi3rrkyk" path="res://SCENES/rock/rock_piece_small.tscn" id="4_8tp8b"]
+[ext_resource type="PackedScene" uid="uid://cpm4fupv2j1j3" path="res://SCENES/rock/moss_piece_large.tscn" id="5_erjvg"]
+[ext_resource type="PackedScene" uid="uid://c4qjubsvqexrv" path="res://SCENES/rock/moss_piece_medium.tscn" id="6_5vn20"]
+[ext_resource type="PackedScene" uid="uid://cbqqt0cf5uipc" path="res://SCENES/rock/moss_piece_small.tscn" id="7_1wteb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gvm7j"]
 size = Vector2(64, 64)

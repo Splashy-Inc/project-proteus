@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://b5q1wh80d1d6g"]
+
+[ext_resource type="Script" path="res://SCRIPTS/vine.gd" id="1_0nhjp"]
+[ext_resource type="PackedScene" uid="uid://bxqlhfgk1l08x" path="res://SCENES/vine/vine_1_piece_1.tscn" id="2_qqk2j"]
+[ext_resource type="PackedScene" uid="uid://bsd6y8ore40e1" path="res://SCENES/vine/vine_1_piece_2.tscn" id="3_vnwhn"]
+[ext_resource type="PackedScene" uid="uid://d8nnln06c0pa" path="res://SCENES/vine/vine_1_piece_3.tscn" id="4_6ejft"]
+[ext_resource type="PackedScene" uid="uid://blhm3nvjxpy7e" path="res://SCENES/vine/vine_1_piece_4.tscn" id="5_l0cqg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvm7j"]
+size = Vector2(64, 64)
+
+[node name="Vine" type="StaticBody2D"]
+collision_layer = 12
+collision_mask = 0
+script = ExtResource("1_0nhjp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gvm7j")
+
+[node name="Pieces" type="Node2D" parent="."]
+
+[node name="vine_1_piece_1" parent="Pieces" instance=ExtResource("2_qqk2j")]
+position = Vector2(-16, -16)
+
+[node name="vine_piece" parent="Pieces" instance=ExtResource("3_vnwhn")]
+position = Vector2(16, -16)
+
+[node name="vine_piece2" parent="Pieces" instance=ExtResource("4_6ejft")]
+position = Vector2(-16, 16)
+
+[node name="vine_piece3" parent="Pieces" instance=ExtResource("5_l0cqg")]
+position = Vector2(16, 16)
