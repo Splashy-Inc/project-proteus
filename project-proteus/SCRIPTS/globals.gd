@@ -13,12 +13,6 @@ enum CollisionLayer {
 	OBSTACLE,
 }
 
-enum LevelType {
-	PRACTICE,
-	FINITE,
-	INFINITE,
-}
-
 var level_column_data_struct = {
 	"is_start_column": false,
 	"bottom_tile": Vector2i.ZERO,
@@ -28,11 +22,6 @@ var level_column_data_struct = {
 
 const TILE_SIZE = Vector2(64,64)
 const PLAYER_JUMP_HEIGHT = TILE_SIZE.y * 2
-const PLAYER_SPEED_TILES = 4
-const PLAYER_SPEED = TILE_SIZE.x * PLAYER_SPEED_TILES
-const CAMERA_MIN_X_DEFAULT = -10.0 * TILE_SIZE.x
-
-var camera_min_x := CAMERA_MIN_X_DEFAULT
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,6 +31,3 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-func reset():
-	camera_min_x = CAMERA_MIN_X_DEFAULT

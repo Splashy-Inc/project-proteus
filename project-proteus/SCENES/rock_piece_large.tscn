@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://r3h62yumeae"]
+[gd_scene load_steps=4 format=3 uid="uid://xhxoredhcxxs"]
 
 [ext_resource type="Texture2D" uid="uid://dsocolwgqhkd5" path="res://ASSETS/Art/Objects/Rock/RockLeft.png" id="1_ay2i2"]
-[ext_resource type="PhysicsMaterial" path="res://rock_physics_material.tres" id="1_k85pu"]
+[ext_resource type="PhysicsMaterial" uid="uid://cmtm4181fhsbo" path="res://rock_physics_material.tres" id="1_k85pu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_btxrb"]
 atlas = ExtResource("1_ay2i2")

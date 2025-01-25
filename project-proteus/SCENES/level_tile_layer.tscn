@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://ony547likux7" path="res://ASSETS/Art/Tiles/JugleTerrain.png" id="2_t0p7h"]
 [ext_resource type="Texture2D" uid="uid://kux0kdqot82n" path="res://ASSETS/Art/Tiles/placeholder_terrain.png" id="2_wwuq7"]
 [ext_resource type="Script" path="res://SCRIPTS/level_tile_layer.gd" id="3_vjn0j"]
-[ext_resource type="PackedScene" uid="uid://bcolnqwarq5ka" path="res://SCENES/rock/rock.tscn" id="4_8gpsq"]
-[ext_resource type="PackedScene" uid="uid://b5q1wh80d1d6g" path="res://SCENES/vine/vine.tscn" id="4_fudyv"]
+[ext_resource type="PackedScene" uid="uid://dq6wtxhsxms6l" path="res://SCENES/target.tscn" id="4_7o438"]
+[ext_resource type="PackedScene" uid="uid://bcolnqwarq5ka" path="res://SCENES/rock.tscn" id="4_8gpsq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_marmu"]
 texture = ExtResource("2_wwuq7")
@@ -817,7 +817,7 @@ texture_region_size = Vector2i(64, 64)
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_behkq"]
 resource_name = "Targets"
 scenes/1/scene = ExtResource("4_8gpsq")
-scenes/2/scene = ExtResource("4_fudyv")
+scenes/2/scene = ExtResource("4_7o438")
 
 [sub_resource type="TileSet" id="TileSet_sfamw"]
 tile_size = Vector2i(64, 64)
@@ -836,3 +836,7 @@ sources/1 = SubResource("TileSetAtlasSource_0icix")
 [node name="LevelTileLayer" type="TileMapLayer"]
 tile_set = SubResource("TileSet_sfamw")
 script = ExtResource("3_vjn0j")
+
+[node name="SectionDeleteTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="SectionDeleteTimer" to="." method="_on_section_delete_timer_timeout"]
