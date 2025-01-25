@@ -602,35 +602,11 @@ tracks/6/keys = {
 }
 tracks/7/type = "value"
 tracks/7/imported = false
-tracks/7/enabled = false
-tracks/7/path = NodePath("AnimatedSprite2D:flip_h")
+tracks/7/enabled = true
+tracks/7/path = NodePath("Legs:frame")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = false
-tracks/8/path = NodePath("Legs:flip_h")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Legs:frame")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -2610,7 +2586,7 @@ states/hammer_transform_right/position = Vector2(128, 45)
 states/hammer_transform_right_back/node = SubResource("AnimationNodeAnimation_rp0sf")
 states/hammer_transform_right_back/position = Vector2(1005, 45)
 transitions = ["Start", "hammer_transform_right", SubResource("AnimationNodeStateMachineTransition_qoe3f"), "hammer_attack_right", "hammer_transform_right_back", SubResource("AnimationNodeStateMachineTransition_2kmne"), "hammer_transform_right_back", "End", SubResource("AnimationNodeStateMachineTransition_cmumy"), "Start", "hammer_transform_left", SubResource("AnimationNodeStateMachineTransition_opdkq"), "hammer_attack_left", "hammer_transform_left_back", SubResource("AnimationNodeStateMachineTransition_0lcn0"), "hammer_transform_left_back", "End", SubResource("AnimationNodeStateMachineTransition_q2m6b"), "hammer_transform_right", "hammer_transform_left", SubResource("AnimationNodeStateMachineTransition_naxjj"), "hammer_transform_left", "hammer_transform_right", SubResource("AnimationNodeStateMachineTransition_4gf5i"), "hammer_transform_right", "hammer_attack_right", SubResource("AnimationNodeStateMachineTransition_iklik"), "hammer_transform_left", "hammer_attack_left", SubResource("AnimationNodeStateMachineTransition_80jln"), "hammer_transform_left", "hammer_idle_left", SubResource("AnimationNodeStateMachineTransition_gbhp4"), "hammer_transform_right", "hammer_idle_right", SubResource("AnimationNodeStateMachineTransition_ga1te"), "hammer_idle_right", "hammer_idle_left", SubResource("AnimationNodeStateMachineTransition_2glgo"), "hammer_idle_left", "hammer_idle_right", SubResource("AnimationNodeStateMachineTransition_p0esc"), "hammer_idle_left", "hammer_move_left", SubResource("AnimationNodeStateMachineTransition_ucu77"), "hammer_move_left", "hammer_idle_left", SubResource("AnimationNodeStateMachineTransition_23a31"), "hammer_idle_right", "hammer_move_right", SubResource("AnimationNodeStateMachineTransition_ncf64"), "hammer_move_right", "hammer_idle_right", SubResource("AnimationNodeStateMachineTransition_2yhmk"), "hammer_move_right", "hammer_attack_right", SubResource("AnimationNodeStateMachineTransition_jy8yy"), "hammer_idle_right", "hammer_attack_right", SubResource("AnimationNodeStateMachineTransition_l8uhf"), "hammer_idle_left", "hammer_attack_left", SubResource("AnimationNodeStateMachineTransition_yi8rq"), "hammer_move_left", "hammer_attack_left", SubResource("AnimationNodeStateMachineTransition_15xt3"), "hammer_move_right", "hammer_move_left", SubResource("AnimationNodeStateMachineTransition_ekskd"), "hammer_move_left", "hammer_move_right", SubResource("AnimationNodeStateMachineTransition_i3fc5"), "hammer_transform_right_back", "hammer_transform_left_back", SubResource("AnimationNodeStateMachineTransition_sbl2i"), "hammer_transform_left_back", "hammer_transform_right_back", SubResource("AnimationNodeStateMachineTransition_7hf6e")]
-graph_offset = Vector2(-75.4158, -49.6183)
+graph_offset = Vector2(-75.4158, 145.259)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3emqk"]
 animation = &"idle"
@@ -2860,13 +2836,13 @@ states/hammer_form/position = Vector2(400, -16.3443)
 states/idle/node = SubResource("AnimationNodeAnimation_3emqk")
 states/idle/position = Vector2(293, 129.656)
 states/jump/node = SubResource("AnimationNodeAnimation_4itwu")
-states/jump/position = Vector2(215, 28.656)
+states/jump/position = Vector2(216, 28.656)
 states/run/node = SubResource("AnimationNodeAnimation_d3bb7")
 states/run/position = Vector2(506, 129.656)
 states/sword_form/node = SubResource("AnimationNodeStateMachine_fcfkx")
 states/sword_form/position = Vector2(400, 251.656)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_awvn1"), "idle", "hammer_form", SubResource("AnimationNodeStateMachineTransition_1ku0c"), "hammer_form", "idle", SubResource("AnimationNodeStateMachineTransition_txawf"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_r8n0u"), "run", "hammer_form", SubResource("AnimationNodeStateMachineTransition_s8c8m"), "hammer_form", "run", SubResource("AnimationNodeStateMachineTransition_bsq5u"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_hr06c"), "idle", "sword_form", SubResource("AnimationNodeStateMachineTransition_bocxi"), "sword_form", "idle", SubResource("AnimationNodeStateMachineTransition_btdh5"), "run", "sword_form", SubResource("AnimationNodeStateMachineTransition_i044j"), "sword_form", "run", SubResource("AnimationNodeStateMachineTransition_6ocse"), "idle", "cannon_form", SubResource("AnimationNodeStateMachineTransition_b2s4e"), "cannon_form", "idle", SubResource("AnimationNodeStateMachineTransition_x53ih"), "run", "cannon_form", SubResource("AnimationNodeStateMachineTransition_6gkrf"), "cannon_form", "run", SubResource("AnimationNodeStateMachineTransition_gqm8m"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_iugmi"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_5s8wn"), "cannon_form", "hammer_form", SubResource("AnimationNodeStateMachineTransition_8ovpp"), "cannon_form", "sword_form", SubResource("AnimationNodeStateMachineTransition_wouxx")]
-graph_offset = Vector2(0, -46.686)
+graph_offset = Vector2(0, -143.826)
 
 [node name="Proteus" type="CharacterBody2D" groups=["player"]]
 z_index = 2
@@ -2896,6 +2872,7 @@ position = Vector2(64, 0)
 libraries = {
 "": SubResource("AnimationLibrary_6r343")
 }
+autoplay = "idle"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_k41y6")

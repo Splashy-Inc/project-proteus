@@ -64,8 +64,7 @@ func _move_state(delta: float):
 		# Give an impule that resolves over JUMP_TIME and peak at JUMP_HEIGHT based on current gravity
 		velocity.y = -sqrt(2 * Globals.PLAYER_JUMP_HEIGHT * get_gravity().y / JUMP_TIME)
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	# Get the input direction and handle the movement
 	_set_direction(Input.get_axis("left", "right"))
 	if direction:
 		velocity.x = direction * SPEED
@@ -143,7 +142,7 @@ func _attack():
 func _set_direction(new_direction: float):
 		direction = ceil(new_direction)
 		if direction != 0:
-			$AnimatedSprite2D.flip_h = direction < 0
+			sprite.flip_h = direction < 0
 			$Legs.flip_h = direction < 0
 			$AttackCenter.position = right_attack_center * direction
 			
