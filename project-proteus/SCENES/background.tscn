@@ -47,7 +47,6 @@ repeat_size = Vector2(2560, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Front"]
 texture = ExtResource("5_umm5s")
-offset = Vector2(0, 360)
 
 [node name="Dirt" type="Parallax2D" parent="."]
 scroll_offset = Vector2(0, 1343)
