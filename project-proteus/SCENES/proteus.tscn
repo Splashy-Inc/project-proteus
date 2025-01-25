@@ -7,9 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://83a156rjduqt" path="res://ASSETS/Art/ProteusRun.png" id="4_plm1m"]
 [ext_resource type="Texture2D" uid="uid://cb2b3o2xadjqi" path="res://ASSETS/Art/HammerSpriteSheet.png" id="5_gfc4l"]
 [ext_resource type="Texture2D" uid="uid://0aryiygx2nu0" path="res://ASSETS/Art/SwordSpriteSheet.png" id="6_k2ksf"]
-[ext_resource type="Texture2D" uid="uid://li35yea30fdq" path="res://ASSETS/Art/ProteusLegs.png" id="8_3ybhv"]
-[ext_resource type="Texture2D" uid="uid://ovvhvqswv0lb" path="res://ASSETS/cannon_icon.tres" id="8_5ijmw"]
-
+[ext_resource type="Texture2D" uid="uid://c57m5ncos14gq" path="res://ASSETS/cannon_icon.tres" id="8_5ijmw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gcjha"]
 atlas = ExtResource("8_3ybhv")

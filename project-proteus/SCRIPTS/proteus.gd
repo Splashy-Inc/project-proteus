@@ -12,6 +12,7 @@ var direction = 0.0
 enum State {
 	IDLE,
 	MOVING,
+	JUMPING,
 	ATTACKING,
 	LAUNCHING,
 }
@@ -69,9 +70,11 @@ func _move_state(delta: float):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	if velocity.x == 0:
+	if not is_on_floor():
+		state_machine.travel("jump")
+	elif velocity.x == 0:
 		state_machine.travel("idle")
-	elif is_on_floor():
+	else:
 		state_machine.travel("run")
 	
 	move_and_slide()
