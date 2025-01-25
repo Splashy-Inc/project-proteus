@@ -102,8 +102,6 @@ func cannon_jump():
 		launch_queued = false
 		if attack_type != Globals.Type.NONE:
 			state = State.ATTACKING
-		#else:
-			#action_queued = false
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("slash"):
