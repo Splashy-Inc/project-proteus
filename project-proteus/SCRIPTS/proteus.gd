@@ -95,19 +95,22 @@ func cannon_jump():
 	# Twice the distance of a normal jump, but has a cooldown
 	velocity.y = -sqrt(4 * Globals.PLAYER_JUMP_HEIGHT * get_gravity().y / JUMP_TIME)
 	$CannonCooldown.start()
-	state = State.IDLE
+	if state == State.LAUNCHING:
+		state = State.IDLE
 	action_queued = false
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("slash"):
-		attack_type = Globals.Type.SLASHING
-		state = State.ATTACKING
+		if state != State.ATTACKING:
+			attack_type = Globals.Type.SLASHING
+			state = State.ATTACKING
 	elif event.is_action_released("slash"):
 		if state == State.ATTACKING and attack_type == Globals.Type.SLASHING:
 			action_queued = true
 	elif event.is_action_pressed("bludgeon"):
-		attack_type = Globals.Type.BLUDGEONING
-		state = State.ATTACKING
+		if state != State.ATTACKING:
+			attack_type = Globals.Type.BLUDGEONING
+			state = State.ATTACKING
 	elif event.is_action_released("bludgeon"):
 		if state == State.ATTACKING and attack_type == Globals.Type.BLUDGEONING:
 			action_queued = true
