@@ -22,6 +22,7 @@ var state: State
 var right_attack_center := Vector2.ZERO
 var attack_type: Globals.Type
 var initialized := false
+var action_queued := false
 
 @export var attack_scene: PackedScene
 
@@ -82,12 +83,12 @@ func _move_state(delta: float):
 func _attack_state():
 	match attack_type:
 		Globals.Type.SLASHING:
-			state_machine.travel("sword_attack")
+			state_machine.travel("sword_form")
 		Globals.Type.BLUDGEONING:
-			state_machine.travel("hammer_attack")
+			state_machine.travel("hammer_form")
 			
 func _launch_state():
-	state_machine.travel("cannon_jump")
+	state_machine.travel("cannon_form")
 
 func cannon_jump():
 	# Give an impule that resolves over JUMP_TIME and peak at JUMP_HEIGHT based on current gravity
@@ -95,17 +96,27 @@ func cannon_jump():
 	velocity.y = -sqrt(4 * Globals.PLAYER_JUMP_HEIGHT * get_gravity().y / JUMP_TIME)
 	$CannonCooldown.start()
 	state = State.IDLE
+	action_queued = false
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("slash"):
 		attack_type = Globals.Type.SLASHING
 		state = State.ATTACKING
+	elif event.is_action_released("slash"):
+		if state == State.ATTACKING and attack_type == Globals.Type.SLASHING:
+			action_queued = true
 	elif event.is_action_pressed("bludgeon"):
 		attack_type = Globals.Type.BLUDGEONING
 		state = State.ATTACKING
+	elif event.is_action_released("bludgeon"):
+		if state == State.ATTACKING and attack_type == Globals.Type.BLUDGEONING:
+			action_queued = true
 	elif event.is_action_pressed("launch"):
 		if $CannonCooldown.is_stopped():
 			state = State.LAUNCHING
+	elif event.is_action_released("launch"):
+		if state == State.LAUNCHING:
+			action_queued = true
 
 func _attack():
 	if $AttackCenter.get_children().is_empty():
@@ -115,11 +126,14 @@ func _attack():
 			new_attack.initialize(attack_type)
 			attack_type = Globals.Type.NONE
 			state = State.IDLE
+			
+	action_queued = false
 
 func _set_direction(new_direction: float):
 		direction = ceil(new_direction)
 		if direction != 0:
 			$AnimatedSprite2D.flip_h = direction < 0
+			$Legs.flip_h = direction < 0
 			$AttackCenter.position = right_attack_center * direction
 			
 func initialize(new_position: Vector2):
