@@ -2,7 +2,9 @@ extends CharacterBody2D
 
 class_name Player
 
-const SPEED = Globals.TILE_SIZE.x * 4
+signal died
+
+const SPEED = Globals.PLAYER_SPEED
 const JUMP_TIME = .5 # How long the player should take to jump
 
 var direction = 0.0
@@ -18,6 +20,7 @@ var state: State
 
 var right_attack_center := Vector2.ZERO
 var attack_type: Globals.Type
+var initialized := false
 
 @export var attack_scene: PackedScene
 
@@ -100,6 +103,7 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("launch"):
 		if $CannonCooldown.is_stopped():
 			state = State.LAUNCHING
+
 func _attack():
 	if $AttackCenter.get_children().is_empty():
 		var new_attack = attack_scene.instantiate()
@@ -114,3 +118,14 @@ func _set_direction(new_direction: float):
 		if direction != 0:
 			$AnimatedSprite2D.flip_h = direction < 0
 			$AttackCenter.position = right_attack_center * direction
+			
+func initialize(new_position: Vector2):
+	global_position = new_position
+	initialized = true
+
+func _on_screen_exited() -> void:
+	if initialized:
+		_die()
+	
+func _die():
+	died.emit()

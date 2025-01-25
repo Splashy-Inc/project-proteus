@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdt6qubt7roc4"]
+
+[ext_resource type="Script" path="res://screen_manager.gd" id="1_sjfhd"]
+[ext_resource type="PackedScene" uid="uid://boqpdg7tttrhe" path="res://SCENES/level.tscn" id="2_k2lka"]
+[ext_resource type="PackedScene" uid="uid://bghuf15gq7iay" path="res://SCENES/hud.tscn" id="3_srhwp"]
+[ext_resource type="PackedScene" uid="uid://bq05ycfbgipjt" path="res://SCENES/background.tscn" id="3_ugynu"]
+
+[node name="ScreenManager" type="Node"]
+script = ExtResource("1_sjfhd")
+level_scene = ExtResource("2_k2lka")
+
+[node name="Background" parent="." instance=ExtResource("3_ugynu")]
+
+[node name="Levels" type="Node" parent="."]
+
+[node name="Level" parent="Levels" instance=ExtResource("2_k2lka")]
+
+[node name="HUD" parent="." instance=ExtResource("3_srhwp")]
+process_mode = 3
+
+[connection signal="start_level" from="HUD" to="." method="_on_start_level"]

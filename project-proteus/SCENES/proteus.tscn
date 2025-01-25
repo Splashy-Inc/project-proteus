@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://li35yea30fdq" path="res://ASSETS/Art/ProteusLegs.png" id="8_3ybhv"]
 [ext_resource type="Texture2D" uid="uid://ovvhvqswv0lb" path="res://ASSETS/cannon_icon.tres" id="8_5ijmw"]
 
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_gcjha"]
 atlas = ExtResource("8_3ybhv")
 region = Rect2(576, 0, 64, 64)
@@ -1719,3 +1720,9 @@ fill_mode = 4
 texture_under = ExtResource("8_5ijmw")
 texture_progress = ExtResource("8_5ijmw")
 tint_under = Color(0, 0, 0, 1)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(5.96046e-07, 0.499997)
+scale = Vector2(2.8, 3.25)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_screen_exited"]

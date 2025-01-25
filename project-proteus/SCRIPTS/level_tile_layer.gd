@@ -1,42 +1,45 @@
 extends TileMapLayer
 
-@export var generate_random := false
-@export var seed: String
+@export var length_tiles := -1
+@export var seed_string: String
 @export var camera: Camera2D
 var start_point: Vector2
 var player_jump_tiles
 var next_top_left = Vector2i.ZERO
 var window_size: Vector2i
+var base_tile_size := Vector2i(Globals.TILE_SIZE)
 var tiles_per_window: Vector2i
-var tiles_per_obstacle = 5
+@export var tiles_per_obstacle = 5
 var latest_path_cell: Vector2i
 var sections := []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var base_tile_size = Vector2i(Globals.PLAYER_JUMP_HEIGHT/2,Globals.PLAYER_JUMP_HEIGHT/2)
 	window_size = Vector2i(get_viewport().get_visible_rect().size)
 	tiles_per_window = Vector2i(window_size/base_tile_size)
 	player_jump_tiles = floor(Globals.PLAYER_JUMP_HEIGHT/tile_set.tile_size.y)
-	$SectionDeleteTimer.wait_time = tiles_per_window.x/2
-	$SectionDeleteTimer.start()
 	
-	if seed:
-		seed(seed.hash())
-		
-	if generate_random:
-		clear()
-		var base_tile_set = tile_set.get_source(1)
-		if base_tile_set is TileSetAtlasSource:
-			base_tile_size = base_tile_set.get_tile_texture_region(Vector2i.ZERO).size
+	seed(seed_string.hash())
+	
+	clear()
+	var base_tile_set = tile_set.get_source(1)
+	if base_tile_set is TileSetAtlasSource:
+		base_tile_size = base_tile_set.get_tile_texture_region(Vector2i.ZERO).size
+	if length_tiles <= 0:
 		start_point = generate_section(next_top_left, tiles_per_window, tiles_per_obstacle, latest_path_cell)
+	elif length_tiles > 0:
+		start_point = generate_section(next_top_left, Vector2i(length_tiles, tiles_per_window.y), tiles_per_obstacle, latest_path_cell)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if camera and generate_random:
+	if camera and length_tiles <= 0:
 		var camera_tile = local_to_map(to_local(camera.global_position))
 		if camera_tile.x > next_top_left.x - tiles_per_window.x * 2:
 			generate_section(next_top_left, next_top_left + tiles_per_window, tiles_per_obstacle, latest_path_cell)
+
+func initialize(new_length: int, new_seed: String):
+	length_tiles = new_length
+	seed_string = new_seed
 
 func generate_section(top_left: Vector2i, bottom_right: Vector2i, avg_tiles_per_obstacle: int, prev_path_cell: Vector2i):
 	var origin = top_left
