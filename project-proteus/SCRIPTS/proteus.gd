@@ -104,23 +104,27 @@ func cannon_jump():
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("slash"):
-		attack_type = Globals.Type.SLASHING
+		if attack_type == Globals.Type.NONE:
+			attack_type = Globals.Type.SLASHING
 		if state != State.ATTACKING and state != State.LAUNCHING:
 			state = State.ATTACKING
 	elif event.is_action_released("slash"):
-		if state == State.ATTACKING and attack_type == Globals.Type.SLASHING:
-			action_queued = true
-		else:
-			attack_type = Globals.Type.NONE
+		if attack_type == Globals.Type.SLASHING:
+			if state == State.ATTACKING:
+				action_queued = true
+			else:
+				attack_type = Globals.Type.NONE
 	elif event.is_action_pressed("bludgeon"):
-		attack_type = Globals.Type.BLUDGEONING
+		if attack_type == Globals.Type.NONE:
+			attack_type = Globals.Type.BLUDGEONING
 		if state != State.ATTACKING and state != State.LAUNCHING:
 			state = State.ATTACKING
 	elif event.is_action_released("bludgeon"):
-		if state == State.ATTACKING and attack_type == Globals.Type.BLUDGEONING:
-			action_queued = true
-		else:
-			attack_type = Globals.Type.NONE
+		if attack_type == Globals.Type.BLUDGEONING:
+			if state == State.ATTACKING:
+				action_queued = true
+			else:
+				attack_type = Globals.Type.NONE
 	elif event.is_action_pressed("launch"):
 		if $CannonCooldown.is_stopped() and state != State.ATTACKING:
 			state = State.LAUNCHING
