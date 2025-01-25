@@ -23,6 +23,7 @@ var right_attack_center := Vector2.ZERO
 var attack_type: Globals.Type
 var initialized := false
 var action_queued := false
+var launch_queued := false
 
 @export var attack_scene: PackedScene
 
@@ -95,31 +96,40 @@ func cannon_jump():
 	# Twice the distance of a normal jump, but has a cooldown
 	velocity.y = -sqrt(4 * Globals.PLAYER_JUMP_HEIGHT * get_gravity().y / JUMP_TIME)
 	$CannonCooldown.start()
+	
 	if state == State.LAUNCHING:
 		state = State.IDLE
-	action_queued = false
+		launch_queued = false
+		if attack_type != Globals.Type.NONE:
+			state = State.ATTACKING
+		#else:
+			#action_queued = false
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("slash"):
-		if state != State.ATTACKING:
-			attack_type = Globals.Type.SLASHING
+		attack_type = Globals.Type.SLASHING
+		if state != State.ATTACKING and state != State.LAUNCHING:
 			state = State.ATTACKING
 	elif event.is_action_released("slash"):
 		if state == State.ATTACKING and attack_type == Globals.Type.SLASHING:
 			action_queued = true
+		else:
+			attack_type = Globals.Type.NONE
 	elif event.is_action_pressed("bludgeon"):
-		if state != State.ATTACKING:
-			attack_type = Globals.Type.BLUDGEONING
+		attack_type = Globals.Type.BLUDGEONING
+		if state != State.ATTACKING and state != State.LAUNCHING:
 			state = State.ATTACKING
 	elif event.is_action_released("bludgeon"):
 		if state == State.ATTACKING and attack_type == Globals.Type.BLUDGEONING:
 			action_queued = true
+		else:
+			attack_type = Globals.Type.NONE
 	elif event.is_action_pressed("launch"):
-		if $CannonCooldown.is_stopped():
+		if $CannonCooldown.is_stopped() and state != State.ATTACKING:
 			state = State.LAUNCHING
 	elif event.is_action_released("launch"):
 		if state == State.LAUNCHING:
-			action_queued = true
+			launch_queued = true
 
 func _attack():
 	if $AttackCenter.get_children().is_empty():
