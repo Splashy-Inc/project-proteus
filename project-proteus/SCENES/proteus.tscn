@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=3 uid="uid://ccljkih7gdac1"]
+[gd_scene load_steps=134 format=3 uid="uid://ccljkih7gdac1"]
 
 [ext_resource type="Script" path="res://SCRIPTS/proteus.gd" id="1_hqlf3"]
 [ext_resource type="Texture2D" uid="uid://bjb8uavvr2f0t" path="res://ASSETS/Art/CanonSpriteSheet.png" id="3_mxpx7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://83a156rjduqt" path="res://ASSETS/Art/ProteusRun.png" id="4_plm1m"]
 [ext_resource type="Texture2D" uid="uid://cb2b3o2xadjqi" path="res://ASSETS/Art/HammerSpriteSheet.png" id="5_gfc4l"]
 [ext_resource type="Texture2D" uid="uid://0aryiygx2nu0" path="res://ASSETS/Art/SwordSpriteSheet.png" id="6_k2ksf"]
+[ext_resource type="Texture2D" uid="uid://basdswl0yhm3j" path="res://ASSETS/Art/ProteusJumpSplat.png" id="7_cp1fc"]
 [ext_resource type="Texture2D" uid="uid://c57m5ncos14gq" path="res://ASSETS/cannon_icon.tres" id="8_5ijmw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uqoao"]
@@ -120,6 +121,14 @@ region = Rect2(64, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_2245h"]
 atlas = ExtResource("4_plm1m")
 region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dep28"]
+atlas = ExtResource("7_cp1fc")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3mba"]
+atlas = ExtResource("7_cp1fc")
+region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_td33s"]
 atlas = ExtResource("4_plm1m")
@@ -276,6 +285,17 @@ animations = [{
 "loop": true,
 "name": &"IdleToRun",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dep28")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3mba")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1053,6 +1073,36 @@ tracks/2/keys = {
 "values": [0.0, -1.5708]
 }
 
+[sub_resource type="Animation" id="Animation_5e7d1"]
+resource_name = "jump"
+length = 0.33335
+loop_mode = 1
+step = 0.166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Jump"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6r343"]
 _data = {
 "RESET": SubResource("Animation_pu1e6"),
@@ -1065,6 +1115,7 @@ _data = {
 "hammer_transform_left": SubResource("Animation_v5aru"),
 "hammer_transform_right": SubResource("Animation_p7hve"),
 "idle": SubResource("Animation_lked2"),
+"jump": SubResource("Animation_5e7d1"),
 "run": SubResource("Animation_xlkpc"),
 "sword_attack_left": SubResource("Animation_048c8"),
 "sword_attack_right": SubResource("Animation_dql0x"),
@@ -1210,6 +1261,9 @@ transitions = ["Start", "hammer_transform_right", SubResource("AnimationNodeStat
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3emqk"]
 animation = &"idle"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4itwu"]
+animation = &"jump"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d3bb7"]
 animation = &"run"
 
@@ -1326,6 +1380,10 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iugmi"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5s8wn"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_k41y6"]
 states/Start/position = Vector2(186, 129.656)
 states/cannon_jump/node = SubResource("AnimationNodeStateMachine_3kk4f")
@@ -1334,12 +1392,14 @@ states/hammer_attack/node = SubResource("AnimationNodeStateMachine_1egdg")
 states/hammer_attack/position = Vector2(400, -15.3443)
 states/idle/node = SubResource("AnimationNodeAnimation_3emqk")
 states/idle/position = Vector2(293, 129.656)
+states/jump/node = SubResource("AnimationNodeAnimation_4itwu")
+states/jump/position = Vector2(215, 28.656)
 states/run/node = SubResource("AnimationNodeAnimation_d3bb7")
 states/run/position = Vector2(506, 129.656)
 states/sword_attack/node = SubResource("AnimationNodeStateMachine_fcfkx")
 states/sword_attack/position = Vector2(400, 251.656)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_awvn1"), "idle", "hammer_attack", SubResource("AnimationNodeStateMachineTransition_1ku0c"), "hammer_attack", "idle", SubResource("AnimationNodeStateMachineTransition_txawf"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_r8n0u"), "run", "hammer_attack", SubResource("AnimationNodeStateMachineTransition_s8c8m"), "hammer_attack", "run", SubResource("AnimationNodeStateMachineTransition_bsq5u"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_hr06c"), "idle", "sword_attack", SubResource("AnimationNodeStateMachineTransition_bocxi"), "sword_attack", "idle", SubResource("AnimationNodeStateMachineTransition_btdh5"), "run", "sword_attack", SubResource("AnimationNodeStateMachineTransition_i044j"), "sword_attack", "run", SubResource("AnimationNodeStateMachineTransition_6ocse"), "idle", "cannon_jump", SubResource("AnimationNodeStateMachineTransition_b2s4e"), "cannon_jump", "idle", SubResource("AnimationNodeStateMachineTransition_x53ih"), "run", "cannon_jump", SubResource("AnimationNodeStateMachineTransition_6gkrf"), "cannon_jump", "run", SubResource("AnimationNodeStateMachineTransition_gqm8m")]
-graph_offset = Vector2(0, -99.8796)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_awvn1"), "idle", "hammer_attack", SubResource("AnimationNodeStateMachineTransition_1ku0c"), "hammer_attack", "idle", SubResource("AnimationNodeStateMachineTransition_txawf"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_r8n0u"), "run", "hammer_attack", SubResource("AnimationNodeStateMachineTransition_s8c8m"), "hammer_attack", "run", SubResource("AnimationNodeStateMachineTransition_bsq5u"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_hr06c"), "idle", "sword_attack", SubResource("AnimationNodeStateMachineTransition_bocxi"), "sword_attack", "idle", SubResource("AnimationNodeStateMachineTransition_btdh5"), "run", "sword_attack", SubResource("AnimationNodeStateMachineTransition_i044j"), "sword_attack", "run", SubResource("AnimationNodeStateMachineTransition_6ocse"), "idle", "cannon_jump", SubResource("AnimationNodeStateMachineTransition_b2s4e"), "cannon_jump", "idle", SubResource("AnimationNodeStateMachineTransition_x53ih"), "run", "cannon_jump", SubResource("AnimationNodeStateMachineTransition_6gkrf"), "cannon_jump", "run", SubResource("AnimationNodeStateMachineTransition_gqm8m"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_iugmi"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_5s8wn")]
+graph_offset = Vector2(0, -124.082)
 
 [node name="Proteus" type="CharacterBody2D" groups=["player"]]
 z_index = 2
