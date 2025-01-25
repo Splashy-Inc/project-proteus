@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://83a156rjduqt" path="res://ASSETS/Art/ProteusRun.png" id="4_plm1m"]
 [ext_resource type="Texture2D" uid="uid://cb2b3o2xadjqi" path="res://ASSETS/Art/HammerSpriteSheet.png" id="5_gfc4l"]
 [ext_resource type="Texture2D" uid="uid://0aryiygx2nu0" path="res://ASSETS/Art/SwordSpriteSheet.png" id="6_k2ksf"]
-[ext_resource type="Texture2D" uid="uid://ovvhvqswv0lb" path="res://ASSETS/cannon_icon.tres" id="8_5ijmw"]
+[ext_resource type="Texture2D" uid="uid://c57m5ncos14gq" path="res://ASSETS/cannon_icon.tres" id="8_5ijmw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uqoao"]
 atlas = ExtResource("3_mxpx7")
@@ -1385,3 +1385,9 @@ fill_mode = 4
 texture_under = ExtResource("8_5ijmw")
 texture_progress = ExtResource("8_5ijmw")
 tint_under = Color(0, 0, 0, 1)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(5.96046e-07, 0.499997)
+scale = Vector2(2.8, 3.25)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_screen_exited"]
