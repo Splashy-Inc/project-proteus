@@ -108,4 +108,4 @@ func delete_section(top_left: Vector2i, bottom_right: Vector2i):
 func _on_section_delete_timer_timeout() -> void:
 	if not sections.is_empty():
 		var section_to_delete = sections.pop_front()
-		delete_section(section_to_delete[0], section_to_delete[1])	
+		delete_section(section_to_delete[0], section_to_delete[1])
