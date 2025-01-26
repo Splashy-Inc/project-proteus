@@ -36,3 +36,12 @@ func _on_pause_menu_main_menu_selected() -> void:
 
 func _on_pause_menu_resume_play() -> void:
 	resume_play.emit()
+
+
+func _on_control_toggle_pressed() -> void:
+	$MenuPanel/HBoxContainer/MenuSections/KeyboardControls.visible = not $MenuPanel/HBoxContainer/MenuSections/KeyboardControls.visible
+	$MenuPanel/HBoxContainer/MenuSections/ControllerControls.visible = not $MenuPanel/HBoxContainer/MenuSections/ControllerControls.visible
+	if $MenuPanel/HBoxContainer/MenuSections/KeyboardControls.visible:
+		$MenuPanel/HBoxContainer/ControlToggle.text = "Hide Controls"
+	else:
+		$MenuPanel/HBoxContainer/ControlToggle.text = "Show Controls"

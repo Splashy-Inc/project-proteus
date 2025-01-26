@@ -22,14 +22,14 @@ theme_override_constants/separation = 20
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "Start"
 
 [node name="Practice" type="Button" parent="Buttons"]
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "Practice
 "
 
@@ -37,7 +37,7 @@ text = "Practice
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "Infinite"
 
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
