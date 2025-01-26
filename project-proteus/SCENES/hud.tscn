@@ -9,8 +9,8 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 script = ExtResource("1_p7wk5")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-offset_right = 1280.0
-offset_bottom = 720.0
+offset_right = 640.0
+offset_bottom = 360.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_5slnp")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
@@ -35,14 +35,14 @@ theme_override_constants/separation = 20
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 32
 text = "Start"
 
 [node name="Practice" type="Button" parent="PanelContainer/VBoxContainer/Buttons"]
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 32
 text = "Practice
 "
 
@@ -50,7 +50,7 @@ text = "Practice
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 32
 text = "Infinite"
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/StartButton" to="." method="_on_start_button_pressed"]

@@ -49,7 +49,7 @@ repeat_size = Vector2(2560, 0)
 texture = ExtResource("5_umm5s")
 
 [node name="Dirt" type="Parallax2D" parent="."]
-scroll_offset = Vector2(0, 1343)
+scroll_offset = Vector2(0, 980)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
