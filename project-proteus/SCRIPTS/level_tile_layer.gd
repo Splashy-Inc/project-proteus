@@ -45,10 +45,8 @@ func generate_chunk(chunk: Dictionary, start_x: int, height: int) -> void:
 			var cur_cell = Vector2i(start_x + x, y)
 			
 			# Find start point (first terrain tile)
-
 			if start_point == Vector2() and x == 0 and cell_value == 1:
 				start_point = to_global(map_to_local(cur_cell + Vector2i(0,-1)))
-			print(start_point)
 
 			match cell_value:
 				0:  # Empty
