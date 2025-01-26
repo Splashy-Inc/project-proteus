@@ -61,3 +61,6 @@ layout_mode = 2
 layout_mode = 2
 
 [connection signal="start_level" from="MenuPanel/HBoxContainer/MenuSections/MenuButtons/MainMenu" to="." method="_on_start_level"]
+[connection signal="main_menu_selected" from="MenuPanel/HBoxContainer/MenuSections/MenuButtons/PauseMenu" to="." method="_on_pause_menu_main_menu_selected"]
+[connection signal="resume_play" from="MenuPanel/HBoxContainer/MenuSections/MenuButtons/PauseMenu" to="." method="_on_pause_menu_resume_play"]
+[connection signal="start_level" from="MenuPanel/HBoxContainer/MenuSections/MenuButtons/PauseMenu" to="." method="_on_start_level"]

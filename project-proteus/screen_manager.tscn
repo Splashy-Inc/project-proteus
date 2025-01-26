@@ -6,16 +6,20 @@
 [ext_resource type="PackedScene" uid="uid://bq05ycfbgipjt" path="res://SCENES/background.tscn" id="3_ugynu"]
 
 [node name="ScreenManager" type="Node"]
+process_mode = 3
 script = ExtResource("1_sjfhd")
 level_scene = ExtResource("2_k2lka")
 
 [node name="Background" parent="." instance=ExtResource("3_ugynu")]
+process_mode = 1
 
 [node name="Levels" type="Node" parent="."]
+process_mode = 1
 
 [node name="Level" parent="Levels" instance=ExtResource("2_k2lka")]
 
 [node name="HUD" parent="." instance=ExtResource("3_srhwp")]
 process_mode = 3
 
+[connection signal="resume_play" from="HUD" to="." method="_on_resume_play"]
 [connection signal="start_level" from="HUD" to="." method="_on_start_level"]
