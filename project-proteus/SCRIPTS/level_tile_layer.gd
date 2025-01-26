@@ -28,15 +28,20 @@ func generate_full_level() -> void:
 	var size = level_data.get("size", [10, 10])
 	var width = size[0]
 	var height = size[1]
+	var terrain_cells = []
 	
 	for chunk in level_data["data"]:
-		generate_chunk(chunk, next_top_left.x, height)
+		terrain_cells += generate_chunk(chunk, next_top_left.x, height)
 		next_top_left.x += width
+	
+	# Connect terrain after full generation
+	set_cells_terrain_connect(terrain_cells, 0, 0, false)
 
-func generate_chunk(chunk: Dictionary, start_x: int, height: int) -> void:
+func generate_chunk(chunk: Dictionary, start_x: int, height: int) -> Array:
 	var size = level_data.get("size", [10, 10])
 	var width = size[0]
 	var grid = chunk["grid"]
+	var terrain_cells = []
 	
 	for y in height:
 		for x in width:
@@ -53,9 +58,11 @@ func generate_chunk(chunk: Dictionary, start_x: int, height: int) -> void:
 					continue
 				1:  # Terrain
 					set_cell(cur_cell, 1, Vector2i(0, 11))
+					terrain_cells.append(cur_cell)
 				2:  # Obstacle
 					set_cell(cur_cell, 2, Vector2i(0, 0), randi_range(1, 2))
-
+	
+	return terrain_cells
 func initialize(json_path: String):
 	level_data_path = json_path
 	_ready()
