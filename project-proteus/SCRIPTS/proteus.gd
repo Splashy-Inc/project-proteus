@@ -12,6 +12,7 @@ var direction = 0.0
 enum State {
 	IDLE,
 	MOVING,
+	JUMPING,
 	ATTACKING,
 	LAUNCHING,
 }
@@ -21,6 +22,8 @@ var state: State
 var right_attack_center := Vector2.ZERO
 var attack_type: Globals.Type
 var initialized := false
+var action_queued := false
+var launch_queued := false
 
 @export var attack_scene: PackedScene
 
@@ -61,17 +64,18 @@ func _move_state(delta: float):
 		# Give an impule that resolves over JUMP_TIME and peak at JUMP_HEIGHT based on current gravity
 		velocity.y = -sqrt(2 * Globals.PLAYER_JUMP_HEIGHT * get_gravity().y / JUMP_TIME)
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	# Get the input direction and handle the movement
 	_set_direction(Input.get_axis("left", "right"))
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	if velocity.x == 0:
+	if not is_on_floor():
+		state_machine.travel("jump")
+	elif velocity.x == 0:
 		state_machine.travel("idle")
-	elif is_on_floor():
+	else:
 		state_machine.travel("run")
 	
 	move_and_slide()
@@ -79,30 +83,54 @@ func _move_state(delta: float):
 func _attack_state():
 	match attack_type:
 		Globals.Type.SLASHING:
-			state_machine.travel("sword_attack")
+			state_machine.travel("sword_form")
 		Globals.Type.BLUDGEONING:
-			state_machine.travel("hammer_attack")
+			state_machine.travel("hammer_form")
 			
 func _launch_state():
-	state_machine.travel("cannon_jump")
+	state_machine.travel("cannon_form")
 
 func cannon_jump():
 	# Give an impule that resolves over JUMP_TIME and peak at JUMP_HEIGHT based on current gravity
 	# Twice the distance of a normal jump, but has a cooldown
 	velocity.y = -sqrt(4 * Globals.PLAYER_JUMP_HEIGHT * get_gravity().y / JUMP_TIME)
 	$CannonCooldown.start()
-	state = State.IDLE
+	
+	if state == State.LAUNCHING:
+		state = State.IDLE
+		launch_queued = false
+		if attack_type != Globals.Type.NONE:
+			state = State.ATTACKING
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("slash"):
-		attack_type = Globals.Type.SLASHING
-		state = State.ATTACKING
+		if attack_type == Globals.Type.NONE:
+			attack_type = Globals.Type.SLASHING
+		if state != State.ATTACKING and state != State.LAUNCHING:
+			state = State.ATTACKING
+	elif event.is_action_released("slash"):
+		if attack_type == Globals.Type.SLASHING:
+			if state == State.ATTACKING:
+				action_queued = true
+			else:
+				attack_type = Globals.Type.NONE
 	elif event.is_action_pressed("bludgeon"):
-		attack_type = Globals.Type.BLUDGEONING
-		state = State.ATTACKING
+		if attack_type == Globals.Type.NONE:
+			attack_type = Globals.Type.BLUDGEONING
+		if state != State.ATTACKING and state != State.LAUNCHING:
+			state = State.ATTACKING
+	elif event.is_action_released("bludgeon"):
+		if attack_type == Globals.Type.BLUDGEONING:
+			if state == State.ATTACKING:
+				action_queued = true
+			else:
+				attack_type = Globals.Type.NONE
 	elif event.is_action_pressed("launch"):
-		if $CannonCooldown.is_stopped():
+		if $CannonCooldown.is_stopped() and state != State.ATTACKING:
 			state = State.LAUNCHING
+	elif event.is_action_released("launch"):
+		if state == State.LAUNCHING:
+			launch_queued = true
 
 func _attack():
 	if $AttackCenter.get_children().is_empty():
@@ -112,11 +140,14 @@ func _attack():
 			new_attack.initialize(attack_type)
 			attack_type = Globals.Type.NONE
 			state = State.IDLE
+			
+	action_queued = false
 
 func _set_direction(new_direction: float):
 		direction = ceil(new_direction)
 		if direction != 0:
-			$AnimatedSprite2D.flip_h = direction < 0
+			sprite.flip_h = direction < 0
+			$Legs.flip_h = direction < 0
 			$AttackCenter.position = right_attack_center * direction
 			
 func initialize(new_position: Vector2):

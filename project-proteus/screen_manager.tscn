@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdt6qubt7roc4"]
+[gd_scene load_steps=5 format=3 uid="uid://b6v3gnw5mfyxa"]
 
 [ext_resource type="Script" path="res://screen_manager.gd" id="1_sjfhd"]
-[ext_resource type="PackedScene" uid="uid://boqpdg7tttrhe" path="res://SCENES/level.tscn" id="2_k2lka"]
-[ext_resource type="PackedScene" uid="uid://bghuf15gq7iay" path="res://SCENES/hud.tscn" id="3_srhwp"]
+[ext_resource type="PackedScene" path="res://SCENES/level.tscn" id="2_k2lka"]
+[ext_resource type="PackedScene" path="res://SCENES/hud.tscn" id="3_srhwp"]
 [ext_resource type="PackedScene" uid="uid://bq05ycfbgipjt" path="res://SCENES/background.tscn" id="3_ugynu"]
 
 [node name="ScreenManager" type="Node"]
