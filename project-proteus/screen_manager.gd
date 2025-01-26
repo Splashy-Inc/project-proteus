@@ -26,7 +26,7 @@ func _reset_game_board(level_type: Globals.LevelType):
 func _on_game_loss():
 	cur_level.queue_free()
 	cur_level = null
-	$HUD.show()
+	$HUD.show_main_menu()
 
 func _on_start_level(level_type: Globals.LevelType) -> void:
 	Globals.cur_level_type = level_type
@@ -42,6 +42,6 @@ func _on_start_level(level_type: Globals.LevelType) -> void:
 	_reset_game_board(level_type)
 	
 	if cur_level:
-		$HUD.hide()
+		$HUD.hide_menus()
 	
 	get_tree().paused = false

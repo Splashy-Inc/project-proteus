@@ -21,3 +21,6 @@ func show_main_menu():
 func hide_menu_buttons():
 	for child in $MenuPanel/HBoxContainer/MenuSections/MenuButtons.get_children():
 		child.hide()
+
+func hide_menus():
+	$MenuPanel.hide()
