@@ -33,6 +33,10 @@ window/stretch/scale_mode="integer"
 targets=""
 player=""
 
+[gui]
+
+theme/custom_font="res://m5x7.ttf"
+
 [input]
 
 jump={
