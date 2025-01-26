@@ -6,6 +6,7 @@ extends TileMapLayer
 var level_data: Dictionary
 var start_point: Vector2
 var next_top_left = Vector2i.ZERO
+var full_height = 15
 
 func _ready() -> void:
 	var file = FileAccess.open(level_data_path, FileAccess.READ)
@@ -43,10 +44,12 @@ func generate_chunk(chunk: Dictionary, start_x: int, height: int) -> Array:
 	var grid = chunk["grid"]
 	var terrain_cells = []
 	
-	for y in height:
+	for y in full_height:
 		for x in width:
-			var index = x + y * width
-			var cell_value = int(grid[index])
+			var cell_value = 1 # default to terrain to pad below the chunk
+			if y < height:
+				var index = x + y * width
+				cell_value = int(grid[index])
 			var cur_cell = Vector2i(start_x + x, y)
 			
 			# Find start point (first terrain tile)
