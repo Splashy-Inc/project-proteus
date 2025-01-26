@@ -1,58 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://bghuf15gq7iay"]
 
 [ext_resource type="Script" path="res://SCRIPTS/hud.gd" id="1_p7wk5"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5slnp"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+[ext_resource type="PackedScene" uid="uid://o5yb8eay16q3" path="res://SCENES/main_menu.tscn" id="2_mwsm5"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_p7wk5")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-offset_right = 640.0
-offset_bottom = 360.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_5slnp")
+[node name="MainMenu" parent="." instance=ExtResource("2_mwsm5")]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 20
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 64
-text = "Project Proteus"
-horizontal_alignment = 1
-
-[node name="Buttons" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
-process_mode = 3
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 20
-
-[node name="StartButton" type="Button" parent="PanelContainer/VBoxContainer/Buttons"]
-process_mode = 3
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "Start"
-
-[node name="Practice" type="Button" parent="PanelContainer/VBoxContainer/Buttons"]
-process_mode = 3
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "Practice
-"
-
-[node name="Infinite" type="Button" parent="PanelContainer/VBoxContainer/Buttons"]
-process_mode = 3
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "Infinite"
-
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/Practice" to="." method="_on_practice_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/Infinite" to="." method="_on_infinite_pressed"]
+[connection signal="start_level" from="MainMenu" to="." method="_on_start_level"]

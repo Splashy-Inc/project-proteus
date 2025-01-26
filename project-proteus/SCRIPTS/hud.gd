@@ -10,11 +10,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _on_start_button_pressed() -> void:
-	start_level.emit(Globals.LevelType.FINITE)
 
-func _on_practice_pressed() -> void:
-	start_level.emit(Globals.LevelType.PRACTICE)
-
-func _on_infinite_pressed() -> void:
-	start_level.emit(Globals.LevelType.INFINITE)
+func _on_start_level(level_type: Globals.LevelType) -> void:
+	start_level.emit(level_type)
