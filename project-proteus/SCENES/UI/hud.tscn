@@ -40,11 +40,16 @@ text = "Project Proteus"
 label_settings = SubResource("LabelSettings_lwe5k")
 horizontal_alignment = 1
 
+[node name="Spacer2" type="Control" parent="MenuPanel/HBoxContainer"]
+layout_mode = 2
+
 [node name="MenuSections" type="HBoxContainer" parent="MenuPanel/HBoxContainer"]
 layout_mode = 2
+alignment = 1
 
 [node name="KeyboardControls" parent="MenuPanel/HBoxContainer/MenuSections" instance=ExtResource("2_t10u4")]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="MenuButtons" type="PanelContainer" parent="MenuPanel/HBoxContainer/MenuSections"]
 layout_mode = 2
@@ -59,8 +64,15 @@ layout_mode = 2
 
 [node name="ControllerControls" parent="MenuPanel/HBoxContainer/MenuSections" instance=ExtResource("5_myr0g")]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ControlToggle" type="Button" parent="MenuPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Hide Controls"
 
 [connection signal="start_level" from="MenuPanel/HBoxContainer/MenuSections/MenuButtons/MainMenu" to="." method="_on_start_level"]
 [connection signal="main_menu_selected" from="MenuPanel/HBoxContainer/MenuSections/MenuButtons/PauseMenu" to="." method="_on_pause_menu_main_menu_selected"]
 [connection signal="resume_play" from="MenuPanel/HBoxContainer/MenuSections/MenuButtons/PauseMenu" to="." method="_on_pause_menu_resume_play"]
 [connection signal="start_level" from="MenuPanel/HBoxContainer/MenuSections/MenuButtons/PauseMenu" to="." method="_on_start_level"]
+[connection signal="pressed" from="MenuPanel/HBoxContainer/ControlToggle" to="." method="_on_control_toggle_pressed"]

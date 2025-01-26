@@ -22,7 +22,7 @@ theme_override_constants/separation = 20
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "Resume
 "
 
@@ -30,7 +30,7 @@ text = "Resume
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "Restart
 "
 
@@ -38,7 +38,7 @@ text = "Restart
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "MainMenu"
 
 [connection signal="pressed" from="Buttons/Resume" to="." method="_on_resume_pressed"]
