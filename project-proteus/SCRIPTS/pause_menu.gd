@@ -1,6 +1,8 @@
 extends PanelContainer
 
 signal start_level
+signal resume_play
+signal main_menu_selected
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,11 +12,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _on_start_button_pressed() -> void:
-	start_level.emit(Globals.LevelType.FINITE)
+func _on_resume_pressed() -> void:
+	resume_play.emit()
 
-func _on_practice_pressed() -> void:
-	start_level.emit(Globals.LevelType.PRACTICE)
+func _on_restart_pressed() -> void:
+	start_level.emit(Globals.cur_level_type)
 
-func _on_infinite_pressed() -> void:
-	start_level.emit(Globals.LevelType.INFINITE)
+func _on_main_menu_pressed() -> void:
+	main_menu_selected.emit()

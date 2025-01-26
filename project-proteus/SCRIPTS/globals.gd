@@ -34,6 +34,8 @@ const CAMERA_MIN_X_DEFAULT = -10.0 * TILE_SIZE.x
 
 var camera_min_x := CAMERA_MIN_X_DEFAULT
 
+var cur_level_type: LevelType
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

@@ -10,6 +10,5 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
 func _on_start_level(level_type: Globals.LevelType) -> void:
 	start_level.emit(level_type)

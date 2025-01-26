@@ -29,6 +29,8 @@ func _on_game_loss():
 	$HUD.show()
 
 func _on_start_level(level_type: Globals.LevelType) -> void:
+	Globals.cur_level_type = level_type
+	
 	match level_type:
 		Globals.LevelType.FINITE:
 			level_length = level_minutes * 60 * Globals.PLAYER_SPEED_TILES
