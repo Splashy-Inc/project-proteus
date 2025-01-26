@@ -4,8 +4,7 @@ extends TileMapLayer
 @export var camera: Camera2D
 
 var level_data: Dictionary
-var current_chunk_index = 0
-var sections := []
+var start_point: Vector2
 var next_top_left = Vector2i.ZERO
 
 func _ready() -> void:
@@ -28,23 +27,29 @@ func _ready() -> void:
 func generate_full_level() -> void:
 	var size = level_data.get("size", [10, 10])
 	var width = size[0]
+	var height = size[1]
 	
 	for chunk in level_data["data"]:
-		generate_chunk(chunk, next_top_left.x)
+		generate_chunk(chunk, next_top_left.x, height)
 		next_top_left.x += width
 
-func generate_chunk(chunk: Dictionary, start_x: int) -> void:
+func generate_chunk(chunk: Dictionary, start_x: int, height: int) -> void:
 	var size = level_data.get("size", [10, 10])
 	var width = size[0]
-	var height = size[1]
 	var grid = chunk["grid"]
 	
-	for x in width:
-		for y in height:
+	for y in height:
+		for x in width:
 			var index = x + y * width
 			var cell_value = int(grid[index])
-			var cur_cell = Vector2i(start_x + x, height - 1 - y)
+			var cur_cell = Vector2i(start_x + x, y)
 			
+			# Find start point (first terrain tile)
+
+			if start_point == Vector2() and x == 0 and cell_value == 1:
+				start_point = to_global(map_to_local(cur_cell + Vector2i(0,-1)))
+			print(start_point)
+
 			match cell_value:
 				0:  # Empty
 					continue
