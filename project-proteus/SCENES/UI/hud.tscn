@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://bghuf15gq7iay"]
+
+[ext_resource type="Script" path="res://SCRIPTS/hud.gd" id="1_p7wk5"]
+[ext_resource type="PackedScene" uid="uid://o5yb8eay16q3" path="res://SCENES/UI/main_menu.tscn" id="2_mwsm5"]
+[ext_resource type="PackedScene" uid="uid://bbxv5nciy82as" path="res://SCENES/keyboard_controls.tscn" id="2_t10u4"]
+[ext_resource type="PackedScene" uid="uid://ds8c7s4m4fofr" path="res://SCENES/UI/pause_menu.tscn" id="4_8n3vf"]
+[ext_resource type="PackedScene" uid="uid://dgb1fjdyqf1e6" path="res://SCENES/controller_controls.tscn" id="5_myr0g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5ptkf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mpo3m"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lwe5k"]
+font_size = 48
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sbt8p"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_p7wk5")
+
+[node name="MenuPanel" type="PanelContainer" parent="."]
+offset_right = 640.0
+offset_bottom = 360.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5ptkf")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MenuPanel"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Spacer" type="Control" parent="MenuPanel/HBoxContainer"]
+layout_mode = 2
+
+[node name="TitleContainer" type="PanelContainer" parent="MenuPanel/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mpo3m")
+
+[node name="Label" type="Label" parent="MenuPanel/HBoxContainer/TitleContainer"]
+layout_mode = 2
+text = "Project Proteus"
+label_settings = SubResource("LabelSettings_lwe5k")
+horizontal_alignment = 1
+
+[node name="MenuSections" type="HBoxContainer" parent="MenuPanel/HBoxContainer"]
+layout_mode = 2
+
+[node name="KeyboardControls" parent="MenuPanel/HBoxContainer/MenuSections" instance=ExtResource("2_t10u4")]
+layout_mode = 2
+
+[node name="MenuButtons" type="PanelContainer" parent="MenuPanel/HBoxContainer/MenuSections"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_sbt8p")
+
+[node name="MainMenu" parent="MenuPanel/HBoxContainer/MenuSections/MenuButtons" instance=ExtResource("2_mwsm5")]
+layout_mode = 2
+
+[node name="PauseMenu" parent="MenuPanel/HBoxContainer/MenuSections/MenuButtons" instance=ExtResource("4_8n3vf")]
+visible = false
+layout_mode = 2
+
+[node name="ControllerControls" parent="MenuPanel/HBoxContainer/MenuSections" instance=ExtResource("5_myr0g")]
+layout_mode = 2
+
+[connection signal="start_level" from="MenuPanel/HBoxContainer/MenuSections/MenuButtons/MainMenu" to="." method="_on_start_level"]
+[connection signal="main_menu_selected" from="MenuPanel/HBoxContainer/MenuSections/MenuButtons/PauseMenu" to="." method="_on_pause_menu_main_menu_selected"]
+[connection signal="resume_play" from="MenuPanel/HBoxContainer/MenuSections/MenuButtons/PauseMenu" to="." method="_on_pause_menu_resume_play"]
+[connection signal="start_level" from="MenuPanel/HBoxContainer/MenuSections/MenuButtons/PauseMenu" to="." method="_on_start_level"]

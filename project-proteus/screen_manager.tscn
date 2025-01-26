@@ -2,20 +2,24 @@
 
 [ext_resource type="Script" path="res://screen_manager.gd" id="1_sjfhd"]
 [ext_resource type="PackedScene" uid="uid://boqpdg7tttrhe" path="res://SCENES/level.tscn" id="2_k2lka"]
-[ext_resource type="PackedScene" uid="uid://bghuf15gq7iay" path="res://SCENES/hud.tscn" id="3_srhwp"]
+[ext_resource type="PackedScene" uid="uid://bghuf15gq7iay" path="res://SCENES/UI/hud.tscn" id="3_srhwp"]
 [ext_resource type="PackedScene" uid="uid://bq05ycfbgipjt" path="res://SCENES/background.tscn" id="3_ugynu"]
 
 [node name="ScreenManager" type="Node"]
+process_mode = 3
 script = ExtResource("1_sjfhd")
 level_scene = ExtResource("2_k2lka")
 
 [node name="Background" parent="." instance=ExtResource("3_ugynu")]
+process_mode = 1
 
 [node name="Levels" type="Node" parent="."]
+process_mode = 1
 
 [node name="Level" parent="Levels" instance=ExtResource("2_k2lka")]
 
 [node name="HUD" parent="." instance=ExtResource("3_srhwp")]
 process_mode = 3
 
+[connection signal="resume_play" from="HUD" to="." method="_on_resume_play"]
 [connection signal="start_level" from="HUD" to="." method="_on_start_level"]
