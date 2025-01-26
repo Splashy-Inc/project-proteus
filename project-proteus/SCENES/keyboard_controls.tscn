@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbxv5nciy82as"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kim6q"]
+
+[node name="KeyboardControls" type="PanelContainer"]
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_kim6q")
