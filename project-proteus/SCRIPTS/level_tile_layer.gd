@@ -5,6 +5,7 @@ extends TileMapLayer
 @export var desired_level_length := 0
 
 var level_data: Dictionary
+var level_start_data: Dictionary
 var start_point: Vector2
 var next_top_left = Vector2i.ZERO
 var full_height = 15
@@ -22,6 +23,18 @@ func _ready() -> void:
 			print("JSON Parse Error: ", json.get_error_message())
 		file.close()
 	
+#	Read level start chunk
+	var file2 = FileAccess.open("res://ASSETS/level_start.json", FileAccess.READ)
+	if file2:
+		var json_string = file2.get_as_text()
+		var json = JSON.new()
+		var parse_result = json.parse(json_string)
+		if parse_result == OK:
+			level_start_data = json.get_data()
+		else:
+			print("JSON Parse Error: ", json.get_error_message())
+		file2.close()
+	
 	clear()
 	
 	if level_data and "data" in level_data:
@@ -33,6 +46,9 @@ func generate_initial_level() -> void:
 	var height = size[1]
 	var terrain_cells = []
 	
+	if level_start_data and "data" in level_start_data:
+		terrain_cells += generate_chunk(level_start_data["data"][0], next_top_left.x - 10, height)
+		
 	for chunk in level_data["data"]:
 		terrain_cells += generate_chunk(chunk, next_top_left.x, height)
 		next_top_left.x += width
@@ -77,7 +93,7 @@ func generate_chunk(chunk: Dictionary, start_x: int, height: int) -> Array:
 			var cur_cell = Vector2i(start_x + x, y)
 			
 			# Find start point (first terrain tile)
-			if start_point == Vector2() and x == 0 and cell_value == 1:
+			if start_point == Vector2() and start_x >=0 and x == 0 and cell_value == 1:
 				start_point = to_global(map_to_local(cur_cell + Vector2i(0,-1)))
 
 			match cell_value:
