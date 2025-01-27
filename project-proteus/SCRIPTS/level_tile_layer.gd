@@ -2,6 +2,7 @@ extends TileMapLayer
 
 @export var level_data_path: String
 @export var camera: Camera2D
+@export var length_tiles := 0
 
 var level_data: Dictionary
 var start_point: Vector2
@@ -66,6 +67,7 @@ func generate_chunk(chunk: Dictionary, start_x: int, height: int) -> Array:
 					set_cell(cur_cell, 2, Vector2i(0, 0), randi_range(1, 2))
 	
 	return terrain_cells
-func initialize(json_path: String):
+func initialize(length: int, json_path: String):
+	length_tiles = length
 	level_data_path = json_path
 	_ready()
