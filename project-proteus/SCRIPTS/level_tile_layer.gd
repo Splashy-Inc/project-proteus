@@ -70,4 +70,3 @@ func generate_chunk(chunk: Dictionary, start_x: int, height: int) -> Array:
 func initialize(length: int, json_path: String):
 	length_tiles = length
 	level_data_path = json_path
-	_ready()
