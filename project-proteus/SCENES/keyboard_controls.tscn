@@ -1,0 +1,144 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbxv5nciy82as"]
+
+[ext_resource type="StyleBox" uid="uid://bya5fo61sl52f" path="res://control_background.tres" id="1_1t4bb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kim6q"]
+
+[node name="KeyboardControls" type="PanelContainer"]
+offset_right = 245.0
+offset_bottom = 183.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_kim6q")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Mouse / Keyboard"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Controls" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Movement" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Controls"]
+layout_mode = 2
+
+[node name="ControlName" type="Label" parent="VBoxContainer/HBoxContainer/Controls/Movement"]
+layout_mode = 2
+text = "Movement"
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer/Controls/Movement"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Controls/Movement"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Controls/Movement/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ControlValue" type="Label" parent="VBoxContainer/HBoxContainer/Controls/Movement/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(14, 0)
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="ControlValue2" type="Label" parent="VBoxContainer/HBoxContainer/Controls/Movement/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(14, 0)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_1t4bb")
+text = "W"
+horizontal_alignment = 1
+
+[node name="ControlValue3" type="Label" parent="VBoxContainer/HBoxContainer/Controls/Movement/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(14, 0)
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Controls/Movement/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ControlValue" type="Label" parent="VBoxContainer/HBoxContainer/Controls/Movement/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(14, 0)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_1t4bb")
+text = "A"
+horizontal_alignment = 1
+
+[node name="ControlValue2" type="Label" parent="VBoxContainer/HBoxContainer/Controls/Movement/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="ControlValue3" type="Label" parent="VBoxContainer/HBoxContainer/Controls/Movement/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(14, 0)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_1t4bb")
+text = "D"
+horizontal_alignment = 1
+
+[node name="Cannonform" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Controls"]
+layout_mode = 2
+
+[node name="ControlName" type="Label" parent="VBoxContainer/HBoxContainer/Controls/Cannonform"]
+layout_mode = 2
+text = "Cannon Form"
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer/Controls/Cannonform"]
+layout_mode = 2
+
+[node name="ControlValue" type="Label" parent="VBoxContainer/HBoxContainer/Controls/Cannonform"]
+custom_minimum_size = Vector2(89, 0)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_1t4bb")
+text = "Shift / Spacebar"
+horizontal_alignment = 1
+
+[node name="SwordForm" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Controls"]
+layout_mode = 2
+
+[node name="ControlName" type="Label" parent="VBoxContainer/HBoxContainer/Controls/SwordForm"]
+layout_mode = 2
+text = "Sword Form"
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer/Controls/SwordForm"]
+layout_mode = 2
+
+[node name="ControlValue" type="Label" parent="VBoxContainer/HBoxContainer/Controls/SwordForm"]
+custom_minimum_size = Vector2(74, 0)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_1t4bb")
+text = "Left-Click / J"
+horizontal_alignment = 1
+
+[node name="HammerForm" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Controls"]
+layout_mode = 2
+
+[node name="ControlName" type="Label" parent="VBoxContainer/HBoxContainer/Controls/HammerForm"]
+layout_mode = 2
+text = "Hammer Form"
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer/Controls/HammerForm"]
+layout_mode = 2
+
+[node name="ControlValue" type="Label" parent="VBoxContainer/HBoxContainer/Controls/HammerForm"]
+custom_minimum_size = Vector2(78, 0)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_1t4bb")
+text = "Right-Click / L"
+horizontal_alignment = 1
+
+[node name="Spacer2" type="Control" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3

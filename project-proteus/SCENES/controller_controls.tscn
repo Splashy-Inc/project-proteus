@@ -1,0 +1,118 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgb1fjdyqf1e6"]
+
+[ext_resource type="StyleBox" uid="uid://bya5fo61sl52f" path="res://control_background.tres" id="1_8yfm3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ll5ke"]
+
+[node name="ControllerControls" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ll5ke")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Controller"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Controls" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Movement" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Controls"]
+layout_mode = 2
+
+[node name="ControlName" type="Label" parent="VBoxContainer/HBoxContainer/Controls/Movement"]
+layout_mode = 2
+text = "Movement"
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer/Controls/Movement"]
+layout_mode = 2
+
+[node name="ControlValue" type="Label" parent="VBoxContainer/HBoxContainer/Controls/Movement"]
+custom_minimum_size = Vector2(84, 0)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_8yfm3")
+text = "L-stick / D-pad"
+horizontal_alignment = 1
+
+[node name="Movement2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Controls"]
+layout_mode = 2
+
+[node name="ControlName" type="Label" parent="VBoxContainer/HBoxContainer/Controls/Movement2"]
+layout_mode = 2
+text = "Jump"
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer/Controls/Movement2"]
+layout_mode = 2
+
+[node name="ControlValue" type="Label" parent="VBoxContainer/HBoxContainer/Controls/Movement2"]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_8yfm3")
+text = "A"
+horizontal_alignment = 1
+
+[node name="Cannonform" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Controls"]
+layout_mode = 2
+
+[node name="ControlName" type="Label" parent="VBoxContainer/HBoxContainer/Controls/Cannonform"]
+layout_mode = 2
+text = "Cannon Form"
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer/Controls/Cannonform"]
+layout_mode = 2
+
+[node name="ControlValue" type="Label" parent="VBoxContainer/HBoxContainer/Controls/Cannonform"]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_8yfm3")
+text = "Y"
+horizontal_alignment = 1
+
+[node name="SwordForm" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Controls"]
+layout_mode = 2
+
+[node name="ControlName" type="Label" parent="VBoxContainer/HBoxContainer/Controls/SwordForm"]
+layout_mode = 2
+text = "Sword Form"
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer/Controls/SwordForm"]
+layout_mode = 2
+
+[node name="ControlValue" type="Label" parent="VBoxContainer/HBoxContainer/Controls/SwordForm"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_8yfm3")
+text = "L-trigger / X"
+horizontal_alignment = 1
+
+[node name="HammerForm" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Controls"]
+layout_mode = 2
+
+[node name="ControlName" type="Label" parent="VBoxContainer/HBoxContainer/Controls/HammerForm"]
+layout_mode = 2
+text = "Hammer Form"
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer/Controls/HammerForm"]
+layout_mode = 2
+
+[node name="ControlValue" type="Label" parent="VBoxContainer/HBoxContainer/Controls/HammerForm"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_8yfm3")
+text = "R-trigger / B"
+horizontal_alignment = 1
+
+[node name="Spacer2" type="Control" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
