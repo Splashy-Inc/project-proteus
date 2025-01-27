@@ -2,12 +2,13 @@ extends TileMapLayer
 
 @export var level_data_path: String
 @export var camera: Camera2D
-@export var length_tiles := 0
+@export var desired_level_length := 0
 
 var level_data: Dictionary
 var start_point: Vector2
 var next_top_left = Vector2i.ZERO
 var full_height = 15
+var chunk_index = 0
 
 func _ready() -> void:
 	var file = FileAccess.open(level_data_path, FileAccess.READ)
@@ -39,6 +40,28 @@ func generate_full_level() -> void:
 	# Connect terrain after full generation
 	set_cells_terrain_connect(terrain_cells, 0, 0, false)
 
+func _process(delta: float) -> void:
+	var should_generate = desired_level_length <= 0 or next_top_left.x < desired_level_length
+	if should_generate and camera:
+		var camera_tile = local_to_map(to_local(camera.global_position))
+		if camera_tile.x > next_top_left.x - 20:
+			generate_next_chunk()
+
+func generate_next_chunk() -> void:
+	var size = level_data.get("size", [10, 10])
+	var width = size[0]
+	var height = size[1]
+	
+	if chunk_index >= level_data["data"].size():
+		chunk_index = 0  # Reset to first chunk if we run out
+	
+	var chunk = level_data["data"][chunk_index]
+	var new_terrain_cells = generate_chunk(chunk, next_top_left.x, height)
+	set_cells_terrain_connect(new_terrain_cells, 0, 0, false)
+	
+	next_top_left.x += width
+	chunk_index += 1
+
 func generate_chunk(chunk: Dictionary, start_x: int, height: int) -> Array:
 	var size = level_data.get("size", [10, 10])
 	var width = size[0]
@@ -67,6 +90,10 @@ func generate_chunk(chunk: Dictionary, start_x: int, height: int) -> Array:
 					set_cell(cur_cell, 2, Vector2i(0, 0), randi_range(1, 2))
 	
 	return terrain_cells
+
 func initialize(length: int, json_path: String):
-	length_tiles = length
+	desired_level_length = length
 	level_data_path = json_path
+	start_point = Vector2()
+	next_top_left = Vector2i.ZERO
+	chunk_index = 0
