@@ -10,18 +10,20 @@ signal level_loss
 @export var lose_point_speed_tiles_per_second := 1.0
 @export var type: Globals.LevelType
 @export var level_data_path: String
+@export var length_tiles := 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if type != Globals.LevelType.PRACTICE:
 		Globals.camera_min_x += lose_point_speed_tiles_per_second * Globals.TILE_SIZE.x * delta
 
-func initialize(new_type: Globals.LevelType, new_lose_speed: float, json_path: String):
+func initialize(new_length: int, new_type: Globals.LevelType, new_lose_speed: float, json_path: String):
+	length_tiles = new_length
 	type = new_type
 	lose_point_speed_tiles_per_second = new_lose_speed
 	level_data_path = json_path
 	
-	$LevelTileLayer.initialize(json_path)
+	$LevelTileLayer.initialize(length_tiles, json_path)
 
 func _spawn_player(spawn_point: Vector2):
 	var new_player = player_scene.instantiate()

@@ -18,7 +18,7 @@ func _reset_game_board(level_type: Globals.LevelType):
 	var new_level = level_scene.instantiate()
 	if new_level is Level:
 		var lose_speed = (Globals.PLAYER_SPEED / 4) / 60
-		new_level.initialize(level_length, level_type, lose_speed)
+		new_level.initialize(level_length, level_type, lose_speed, 'res://ASSETS/level_sample.json')
 	$Levels.add_child(new_level)
 	new_level.level_loss.connect(_on_game_loss)
 	cur_level = new_level
