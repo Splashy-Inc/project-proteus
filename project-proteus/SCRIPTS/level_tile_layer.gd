@@ -25,9 +25,9 @@ func _ready() -> void:
 	clear()
 	
 	if level_data and "data" in level_data:
-		generate_full_level()
+		generate_initial_level()
 
-func generate_full_level() -> void:
+func generate_initial_level() -> void:
 	var size = level_data.get("size", [10, 10])
 	var width = size[0]
 	var height = size[1]
