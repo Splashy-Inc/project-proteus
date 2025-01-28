@@ -37,11 +37,27 @@ func _on_pause_menu_main_menu_selected() -> void:
 func _on_pause_menu_resume_play() -> void:
 	resume_play.emit()
 
-
 func _on_control_toggle_pressed() -> void:
-	$MenuPanel/HBoxContainer/MenuSections/KeyboardControls.visible = not $MenuPanel/HBoxContainer/MenuSections/KeyboardControls.visible
-	$MenuPanel/HBoxContainer/MenuSections/ControllerControls.visible = not $MenuPanel/HBoxContainer/MenuSections/ControllerControls.visible
+	_set_control_visibility(not $MenuPanel/HBoxContainer/MenuSections/KeyboardControls.visible)
+		
+func _set_control_visibility(is_visible: bool):
+	$MenuPanel/HBoxContainer/MenuSections/KeyboardControls.visible = is_visible
+	$MenuPanel/HBoxContainer/MenuSections/ControllerControls.visible = is_visible
 	if $MenuPanel/HBoxContainer/MenuSections/KeyboardControls.visible:
 		$MenuPanel/HBoxContainer/ControlToggle.text = "Hide Controls"
 	else:
 		$MenuPanel/HBoxContainer/ControlToggle.text = "Show Controls"
+
+func show_loss_screen():
+	hide_menu_buttons()
+	$MenuPanel.show()
+	_set_control_visibility(false)
+	$MenuPanel/HBoxContainer/TitleContainer/Label.text = "You have been caught!"
+	$MenuPanel/HBoxContainer/MenuSections/MenuButtons/WinLossMenu.show()
+
+func show_win_screen():
+	hide_menu_buttons()
+	$MenuPanel.show()
+	_set_control_visibility(false)
+	$MenuPanel/HBoxContainer/TitleContainer/Label.text = "You made it to freedom!"
+	$MenuPanel/HBoxContainer/MenuSections/MenuButtons/WinLossMenu.show()

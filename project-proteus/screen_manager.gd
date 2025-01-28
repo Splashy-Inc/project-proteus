@@ -27,13 +27,19 @@ func _reset_game_board(level_type: Globals.LevelType):
 		new_level.initialize(level_length, level_type, 'res://ASSETS/level_sample.json')
 	$Levels.add_child(new_level)
 	new_level.level_loss.connect(_on_game_loss)
+	new_level.level_win.connect(_on_game_win)
 	cur_level = new_level
 	_on_resume_play()
 
 func _on_game_loss():
 	cur_level.queue_free()
 	cur_level = null
-	$HUD.show_main_menu()
+	$HUD.show_loss_screen()
+
+func _on_game_win():
+	cur_level.queue_free()
+	cur_level = null
+	$HUD.show_win_screen()
 
 func _on_start_level(level_type: Globals.LevelType) -> void:
 	Globals.cur_level_type = level_type
