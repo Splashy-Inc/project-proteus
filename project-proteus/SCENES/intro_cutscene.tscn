@@ -87,10 +87,10 @@ tracks/2/path = NodePath("../Label:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": []
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5mxgp"]
@@ -267,6 +267,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_end_cutscene"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_0ljp8"]
 length = 0.001
@@ -339,7 +353,6 @@ texture = ExtResource("1_hg2bb")
 stretch_mode = 2
 
 [node name="Label" type="Label" parent="TextureRect"]
-visible = false
 custom_minimum_size = Vector2(900, 0)
 offset_left = 191.0
 offset_top = 8.0
@@ -371,7 +384,7 @@ position = Vector2(-179, 200)
 position = Vector2(676, 598)
 sprite_frames = SubResource("SpriteFrames_5twrm")
 autoplay = "default"
-frame_progress = 0.376334
+frame_progress = 0.0812783
 
 [node name="Label" type="Label" parent="AnimatedSprite2D"]
 visible = false
@@ -383,6 +396,7 @@ text = "Gotta go!"
 label_settings = SubResource("LabelSettings_c3qho")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
 root_node = NodePath("../AnimatedSprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_k0hdv")

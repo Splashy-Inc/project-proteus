@@ -8,6 +8,7 @@ var level_minutes = 1
 
 func _ready():
 	cur_level = $Levels.find_child("Level")
+	$HUD.hide()
 	get_tree().paused = true
 
 func _input(event: InputEvent) -> void:
@@ -60,9 +61,13 @@ func _on_start_level(level_type: Globals.LevelType) -> void:
 	get_tree().paused = false
 
 func _on_resume_play() -> void:
-	$HUD.hide_menus()
-	get_tree().paused = false
+	if not $IntroCutscene:
+		$HUD.hide_menus()
+		get_tree().paused = false
 
 func _pause_play():
 	$HUD.show_pause_menu()
 	get_tree().paused = true
+
+func _on_intro_cutscene_ended() -> void:
+	$HUD.show()

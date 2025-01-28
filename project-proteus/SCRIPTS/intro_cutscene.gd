@@ -1,5 +1,6 @@
 extends Node2D
 
+signal ended
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,3 +18,7 @@ func _on_timer_timeout() -> void:
 
 func _on_timer_2_timeout() -> void:
 	$AnimationPlayer.play("run_away")
+
+func _end_cutscene():
+	queue_free()
+	ended.emit()
