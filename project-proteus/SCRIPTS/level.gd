@@ -3,6 +3,7 @@ extends Node
 class_name Level
 
 signal level_loss
+signal level_win
 
 @export var player_scene: PackedScene
 @export var camera: Camera2D
@@ -25,6 +26,7 @@ func initialize(new_length: int, new_type: Globals.LevelType, json_path: String)
 	length_tiles = new_length
 	type = new_type
 	level_data_path = json_path
+	camera.limit_right = length_tiles * Globals.TILE_SIZE.x
 	
 	$LevelTileLayer.initialize(length_tiles, json_path)
 	
@@ -47,4 +49,7 @@ func _on_level_tile_layer_ready() -> void:
 	call_deferred("_spawn_player", $LevelTileLayer.start_point)
 	
 func _on_player_died():
-	level_loss.emit()
+	if cur_player.global_position.x < $FishMob.global_position.x:
+		level_loss.emit()
+	else:
+		level_win.emit()

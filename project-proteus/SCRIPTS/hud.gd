@@ -54,3 +54,10 @@ func show_loss_screen():
 	_set_control_visibility(false)
 	$MenuPanel/HBoxContainer/TitleContainer/Label.text = "You have been caught!"
 	$MenuPanel/HBoxContainer/MenuSections/MenuButtons/WinLossMenu.show()
+
+func show_win_screen():
+	hide_menu_buttons()
+	$MenuPanel.show()
+	_set_control_visibility(false)
+	$MenuPanel/HBoxContainer/TitleContainer/Label.text = "You made it to freedom!"
+	$MenuPanel/HBoxContainer/MenuSections/MenuButtons/WinLossMenu.show()
