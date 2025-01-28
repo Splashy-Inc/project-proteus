@@ -18,6 +18,7 @@ func _process(delta: float) -> void:
 		Globals.camera_min_x += Globals.LOSE_POINT_SPEED * delta
 		if Globals.camera_min_x < cur_player.global_position.x - Globals.MAX_LOSE_DISTANCE_TO_PLAYER:
 			Globals.camera_min_x = cur_player.global_position.x - Globals.MAX_LOSE_DISTANCE_TO_PLAYER
+	$FishMob.global_position.x = Globals.camera_min_x + 50
 
 func initialize(new_length: int, new_type: Globals.LevelType, json_path: String):
 	length_tiles = new_length
