@@ -1,15 +1,19 @@
-[gd_scene load_steps=5 format=4 uid="uid://boqpdg7tttrhe"]
+[gd_scene load_steps=6 format=4 uid="uid://boqpdg7tttrhe"]
 
 [ext_resource type="Script" path="res://SCRIPTS/level.gd" id="1_3r5q4"]
 [ext_resource type="PackedScene" uid="uid://ccljkih7gdac1" path="res://SCENES/proteus.tscn" id="2_yidkl"]
 [ext_resource type="PackedScene" uid="uid://bjlgecas87uqo" path="res://SCENES/level_tile_layer.tscn" id="3_66xo7"]
 [ext_resource type="PackedScene" uid="uid://bclumrmjmufkl" path="res://SCENES/game_camera.tscn" id="4_7voon"]
+[ext_resource type="PackedScene" uid="uid://dhr37dt1lr3u5" path="res://SCENES/fish_mob.tscn" id="5_hegm1"]
 
-[node name="Level" type="Node" node_paths=PackedStringArray("camera")]
+[node name="Level" type="Node" node_paths=PackedStringArray("camera", "cur_player")]
 script = ExtResource("1_3r5q4")
 player_scene = ExtResource("2_yidkl")
 camera = NodePath("Proteus/GameCamera")
 can_lose = true
+cur_player = NodePath("Proteus")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="LevelTileLayer" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("3_66xo7")]
 z_index = 2
@@ -21,5 +25,8 @@ camera = NodePath("../Proteus/GameCamera")
 z_index = 1
 
 [node name="GameCamera" parent="Proteus" instance=ExtResource("4_7voon")]
+
+[node name="FishMob" parent="." instance=ExtResource("5_hegm1")]
+position = Vector2(-640, -33)
 
 [connection signal="ready" from="LevelTileLayer" to="." method="_on_level_tile_layer_ready"]
