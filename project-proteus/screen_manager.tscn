@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6v3gnw5mfyxa"]
+[gd_scene load_steps=6 format=3 uid="uid://b6v3gnw5mfyxa"]
 
 [ext_resource type="Script" path="res://screen_manager.gd" id="1_sjfhd"]
 [ext_resource type="PackedScene" uid="uid://boqpdg7tttrhe" path="res://SCENES/level.tscn" id="2_k2lka"]
 [ext_resource type="PackedScene" uid="uid://bghuf15gq7iay" path="res://SCENES/UI/hud.tscn" id="3_srhwp"]
 [ext_resource type="PackedScene" uid="uid://bq05ycfbgipjt" path="res://SCENES/background.tscn" id="3_ugynu"]
+[ext_resource type="PackedScene" uid="uid://fgqrj6dwm8f6" path="res://SCENES/intro_cutscene.tscn" id="5_e7xc1"]
 
 [node name="ScreenManager" type="Node"]
 process_mode = 3
@@ -21,5 +22,9 @@ process_mode = 1
 [node name="HUD" parent="." instance=ExtResource("3_srhwp")]
 process_mode = 3
 
+[node name="IntroCutscene" parent="." instance=ExtResource("5_e7xc1")]
+z_index = 20
+
 [connection signal="resume_play" from="HUD" to="." method="_on_resume_play"]
 [connection signal="start_level" from="HUD" to="." method="_on_start_level"]
+[connection signal="ended" from="IntroCutscene" to="." method="_on_intro_cutscene_ended"]
