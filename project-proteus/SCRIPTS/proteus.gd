@@ -150,8 +150,8 @@ func _attack():
 func _set_direction(new_direction: float):
 		direction = ceil(new_direction)
 		if direction != 0:
-			sprite.flip_h = direction < 0
-			$Legs.flip_h = direction < 0
+			#sprite.flip_h = direction < 0
+			#$Legs.flip_h = direction < 0
 			$AttackCenter.position = right_attack_center * direction
 			
 func initialize(new_position: Vector2):
