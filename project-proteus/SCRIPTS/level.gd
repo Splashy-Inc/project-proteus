@@ -18,7 +18,8 @@ func _process(delta: float) -> void:
 		Globals.camera_min_x += Globals.LOSE_POINT_SPEED * delta
 		if Globals.camera_min_x < cur_player.global_position.x - Globals.MAX_LOSE_DISTANCE_TO_PLAYER:
 			Globals.camera_min_x = cur_player.global_position.x - Globals.MAX_LOSE_DISTANCE_TO_PLAYER
-	$FishMob.global_position.x = Globals.camera_min_x + 50
+		if $FishMob.visible:
+			$FishMob.global_position.x = Globals.camera_min_x + 50
 
 func initialize(new_length: int, new_type: Globals.LevelType, json_path: String):
 	length_tiles = new_length
@@ -26,6 +27,9 @@ func initialize(new_length: int, new_type: Globals.LevelType, json_path: String)
 	level_data_path = json_path
 	
 	$LevelTileLayer.initialize(length_tiles, json_path)
+	
+	if type == Globals.LevelType.PRACTICE:
+		$FishMob.hide()
 
 func _spawn_player(spawn_point: Vector2):
 	var new_player = player_scene.instantiate()
