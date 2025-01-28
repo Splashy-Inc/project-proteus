@@ -33,7 +33,7 @@ func _reset_game_board(level_type: Globals.LevelType):
 func _on_game_loss():
 	cur_level.queue_free()
 	cur_level = null
-	$HUD.show_main_menu()
+	$HUD.show_loss_screen()
 
 func _on_start_level(level_type: Globals.LevelType) -> void:
 	Globals.cur_level_type = level_type
