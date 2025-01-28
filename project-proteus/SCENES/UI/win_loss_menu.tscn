@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://ds8c7s4m4fofr"]
+[gd_scene load_steps=3 format=3 uid="uid://clo1gt2bygofh"]
 
-[ext_resource type="Script" path="res://SCRIPTS/pause_menu.gd" id="1_egbnp"]
+[ext_resource type="Script" path="res://SCRIPTS/pause_menu.gd" id="1_1t5gp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5slnp"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="PauseMenu" type="PanelContainer"]
+[node name="WinLossMenu" type="PanelContainer"]
 offset_right = 132.0
 offset_bottom = 199.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_5slnp")
-script = ExtResource("1_egbnp")
+script = ExtResource("1_1t5gp")
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 process_mode = 3
@@ -18,20 +18,12 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 20
 
-[node name="Resume" type="Button" parent="Buttons"]
-process_mode = 3
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 48
-text = "Resume
-"
-
 [node name="Restart" type="Button" parent="Buttons"]
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 48
-text = "Restart
+text = "Escape Again!
 "
 
 [node name="MainMenu" type="Button" parent="Buttons"]
@@ -41,6 +33,5 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 48
 text = "Main Menu"
 
-[connection signal="pressed" from="Buttons/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Buttons/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="Buttons/MainMenu" to="." method="_on_main_menu_pressed"]

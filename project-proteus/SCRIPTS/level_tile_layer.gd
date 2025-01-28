@@ -1,111 +1,115 @@
 extends TileMapLayer
 
-@export var length_tiles := -1
-@export var seed_string: String
+@export var level_data_path: String
 @export var camera: Camera2D
-var start_point: Vector2
-var player_jump_tiles
-var next_top_left = Vector2i.ZERO
-var window_size: Vector2i
-var base_tile_size := Vector2i(Globals.TILE_SIZE)
-var tiles_per_window: Vector2i
-@export var tiles_per_obstacle = 5
-var latest_path_cell: Vector2i
-var sections := []
+@export var desired_level_length := 0
 
-# Called when the node enters the scene tree for the first time.
+var level_data: Dictionary
+var level_start_data: Dictionary
+var start_point: Vector2
+var next_top_left = Vector2i.ZERO
+var full_height = 15
+var chunk_index = 0
+
 func _ready() -> void:
-	window_size = Vector2i(get_viewport().get_visible_rect().size)
-	tiles_per_window = Vector2i(window_size/base_tile_size)
-	player_jump_tiles = floor(Globals.PLAYER_JUMP_HEIGHT/tile_set.tile_size.y)
+	var file = FileAccess.open(level_data_path, FileAccess.READ)
+	if file:
+		var json_string = file.get_as_text()
+		var json = JSON.new()
+		var parse_result = json.parse(json_string)
+		if parse_result == OK:
+			level_data = json.get_data()
+		else:
+			print("JSON Parse Error: ", json.get_error_message())
+		file.close()
 	
-	seed(seed_string.hash())
+#	Read level start chunk
+	var file2 = FileAccess.open("res://ASSETS/level_start.json", FileAccess.READ)
+	if file2:
+		var json_string = file2.get_as_text()
+		var json = JSON.new()
+		var parse_result = json.parse(json_string)
+		if parse_result == OK:
+			level_start_data = json.get_data()
+		else:
+			print("JSON Parse Error: ", json.get_error_message())
+		file2.close()
 	
 	clear()
-	var base_tile_set = tile_set.get_source(1)
-	if base_tile_set is TileSetAtlasSource:
-		base_tile_size = base_tile_set.get_tile_texture_region(Vector2i.ZERO).size
-	if length_tiles <= 0:
-		start_point = generate_section(next_top_left, tiles_per_window, tiles_per_obstacle, latest_path_cell)
-	elif length_tiles > 0:
-		start_point = generate_section(next_top_left, Vector2i(length_tiles, tiles_per_window.y), tiles_per_obstacle, latest_path_cell)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if camera and length_tiles <= 0:
-		var camera_tile = local_to_map(to_local(camera.global_position))
-		if camera_tile.x > next_top_left.x - tiles_per_window.x * 2:
-			generate_section(next_top_left, next_top_left + tiles_per_window, tiles_per_obstacle, latest_path_cell)
-
-func initialize(new_length: int, new_seed: String):
-	length_tiles = new_length
-	seed_string = new_seed
-
-func generate_section(top_left: Vector2i, bottom_right: Vector2i, avg_tiles_per_obstacle: int, prev_path_cell: Vector2i):
-	var origin = top_left
-	var size = bottom_right - origin
-	var start_position
 	
-	for x in size.x:
-		var column_data = Globals.level_column_data_struct.duplicate(true)
-		column_data["height"] = size.y
-		column_data["bottom_cell"] = Vector2i(x+origin.x,bottom_right.y)
-		if x > 0 and x % avg_tiles_per_obstacle == 0:
-			column_data["num_obstacles"] += 1
-		prev_path_cell = generate_column(column_data, prev_path_cell)
-		if x == 0:
-			column_data["is_start_column"] = true
-			start_position = to_global(map_to_local(prev_path_cell))
-	
-	# TODO: Figure out how to avoid process spike when updating autotiler
-	var section_rect = Rect2i(origin, size)
-	var section_cells = []
-	for x in section_rect.size.x:
-		for y in section_rect.size.y:
-			var new_cell = Vector2i(section_rect.position) + Vector2i(x,y)
-			if get_cell_source_id(new_cell) == 1:
-				section_cells.append(new_cell)
-	set_cells_terrain_connect(section_cells,0,0,false)
-	next_top_left = Vector2i(bottom_right.x, next_top_left.y)
-	latest_path_cell = prev_path_cell
-	sections.append([top_left,bottom_right])
-	return start_position
+	if level_data and "data" in level_data:
+		generate_initial_level()
 
-func generate_column(column_data: Dictionary, prev_path_cell) -> Vector2i:
-	var bottom_cell = column_data["bottom_cell"]
-	var height = column_data["height"]
+func generate_initial_level() -> void:
+	var size = level_data.get("size", [10, 10])
+	var width = size[0]
+	var height = size[1]
+	var terrain_cells = []
 	
-	var path_cell = bottom_cell - Vector2i(0, randi_range(1,height))
-	if prev_path_cell:
-		path_cell = prev_path_cell + Vector2i(1, randi_range(-player_jump_tiles,player_jump_tiles))
-		if path_cell.y >= bottom_cell.y:
-			path_cell.y = bottom_cell.y - 1
-		elif path_cell.y <= bottom_cell.y - height:
-			path_cell.y = bottom_cell.y - height + 1
-	
-	var x = bottom_cell.x
-	for y in height:
-		# Start at bottom cell and build up from there
-		var cur_cell = Vector2i(x,bottom_cell.y-y)
+	if level_start_data and "data" in level_start_data:
+		terrain_cells += generate_chunk(level_start_data["data"][0], next_top_left.x - 10, height)
 		
-		# Fill terrain tiles under path cell
-		if cur_cell.y > path_cell.y:
-			set_cell(cur_cell,1,Vector2i(0,11))
-			
-		# Place an obstacle in the path cell if terrain height between path cells increased by max jump height
-		#   Only place if we have obstacles we can place
-		elif prev_path_cell and cur_cell == path_cell and column_data["num_obstacles"] > 0:
-			if prev_path_cell.y == cur_cell.y + player_jump_tiles:
-				set_cell(cur_cell,2,Vector2i(0,0),randi_range(1,2))
-			
-	return path_cell
+	for chunk in level_data["data"]:
+		terrain_cells += generate_chunk(chunk, next_top_left.x, height)
+		next_top_left.x += width
 	
-func delete_section(top_left: Vector2i, bottom_right: Vector2i):
-	for x in range(top_left.x, bottom_right.x+1):
-		for y in range(top_left.y, bottom_right.y+1):
-			erase_cell(Vector2i(x, y))
+	# Connect terrain after full generation
+	set_cells_terrain_connect(terrain_cells, 0, 0, false)
 
-func _on_section_delete_timer_timeout() -> void:
-	if not sections.is_empty():
-		var section_to_delete = sections.pop_front()
-		delete_section(section_to_delete[0], section_to_delete[1])
+func _process(delta: float) -> void:
+	var should_generate = desired_level_length <= 0 or next_top_left.x < desired_level_length
+	if should_generate and camera:
+		var camera_tile = local_to_map(to_local(camera.global_position))
+		if camera_tile.x > next_top_left.x - 20:
+			generate_next_chunk()
+
+func generate_next_chunk() -> void:
+	var size = level_data.get("size", [10, 10])
+	var width = size[0]
+	var height = size[1]
+	
+	if chunk_index >= level_data["data"].size():
+		chunk_index = 0  # Reset to first chunk if we run out
+	
+	var chunk = level_data["data"][chunk_index]
+	var new_terrain_cells = generate_chunk(chunk, next_top_left.x, height)
+	set_cells_terrain_connect(new_terrain_cells, 0, 0, false)
+	
+	next_top_left.x += width
+	chunk_index += 1
+
+func generate_chunk(chunk: Dictionary, start_x: int, height: int) -> Array:
+	var size = level_data.get("size", [10, 10])
+	var width = size[0]
+	var grid = chunk["grid"]
+	var terrain_cells = []
+	
+	for y in full_height:
+		for x in width:
+			var cell_value = 1 # default to terrain to pad below the chunk
+			if y < height:
+				var index = x + y * width
+				cell_value = int(grid[index])
+			var cur_cell = Vector2i(start_x + x, y)
+			
+			# Find start point (first terrain tile)
+			if start_point == Vector2() and start_x >=0 and x == 0 and cell_value == 1:
+				start_point = to_global(map_to_local(cur_cell + Vector2i(0,-1)))
+
+			match cell_value:
+				0:  # Empty
+					continue
+				1:  # Terrain
+					set_cell(cur_cell, 1, Vector2i(0, 11))
+					terrain_cells.append(cur_cell)
+				2:  # Obstacle
+					set_cell(cur_cell, 2, Vector2i(0, 0), randi_range(1, 2))
+	
+	return terrain_cells
+
+func initialize(length: int, json_path: String):
+	desired_level_length = length
+	level_data_path = json_path
+	start_point = Vector2()
+	next_top_left = Vector2i.ZERO
+	chunk_index = 0

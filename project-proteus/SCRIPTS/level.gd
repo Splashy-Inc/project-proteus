@@ -3,29 +3,35 @@ extends Node
 class_name Level
 
 signal level_loss
+signal level_win
 
 @export var player_scene: PackedScene
 @export var camera: Camera2D
 @export var can_lose = false
-@export var lose_point_speed_tiles_per_second := 1.0
 @export var type: Globals.LevelType
+@export var level_data_path: String
 @export var length_tiles := 0
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
+@export var cur_player: Player
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if type != Globals.LevelType.PRACTICE:
-		Globals.camera_min_x += lose_point_speed_tiles_per_second * Globals.TILE_SIZE.x * delta
+	if type != Globals.LevelType.PRACTICE and cur_player:
+		Globals.camera_min_x += Globals.LOSE_POINT_SPEED * delta
+		if Globals.camera_min_x < cur_player.global_position.x - Globals.MAX_LOSE_DISTANCE_TO_PLAYER:
+			Globals.camera_min_x = cur_player.global_position.x - Globals.MAX_LOSE_DISTANCE_TO_PLAYER
+		if $FishMob.visible:
+			$FishMob.global_position.x = Globals.camera_min_x + 50
 
-func initialize(new_length: int, new_type: Globals.LevelType, new_lose_speed: float):
+func initialize(new_length: int, new_type: Globals.LevelType, json_path: String):
 	length_tiles = new_length
 	type = new_type
-	lose_point_speed_tiles_per_second = new_lose_speed
+	level_data_path = json_path
+	camera.limit_right = length_tiles * Globals.TILE_SIZE.x
 	
-	$LevelTileLayer.initialize(length_tiles, Globals.LevelType.keys()[type])
+	$LevelTileLayer.initialize(length_tiles, json_path)
+	
+	if type == Globals.LevelType.PRACTICE:
+		$FishMob.hide()
 
 func _spawn_player(spawn_point: Vector2):
 	var new_player = player_scene.instantiate()
@@ -37,9 +43,13 @@ func _spawn_player(spawn_point: Vector2):
 			player.queue_free()
 	new_player.died.connect(_on_player_died)
 	new_player.initialize(spawn_point)
+	cur_player = new_player
 
 func _on_level_tile_layer_ready() -> void:
 	call_deferred("_spawn_player", $LevelTileLayer.start_point)
 	
 func _on_player_died():
-	level_loss.emit()
+	if cur_player.global_position.x < $FishMob.global_position.x:
+		level_loss.emit()
+	else:
+		level_win.emit()
