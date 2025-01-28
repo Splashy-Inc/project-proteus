@@ -1,0 +1,87 @@
+[gd_scene load_steps=9 format=3 uid="uid://dn0vx82213naw"]
+
+[ext_resource type="Texture2D" uid="uid://blf72y5l7bfdl" path="res://ASSETS/Art/Background/BackGroundLayer1.png" id="1_wi5x7"]
+[ext_resource type="Texture2D" uid="uid://dr57cgl1102tc" path="res://ASSETS/Art/Background/BackGroundLayer2.png" id="2_s3fgu"]
+[ext_resource type="Texture2D" uid="uid://cyti6cefq4h14" path="res://ASSETS/Art/Background/BackGroundLayer3.png" id="3_8mnu0"]
+[ext_resource type="Texture2D" uid="uid://ckkvn6j5f7i30" path="res://ASSETS/Art/Background/BackGroundLayer4.png" id="4_mq2fh"]
+[ext_resource type="Texture2D" uid="uid://ng0h60tu1rvo" path="res://ASSETS/Art/Background/BackGroundLayer5.png" id="5_prlc2"]
+
+[sub_resource type="Animation" id="Animation_4x3tp"]
+resource_name = "new_animation"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3, 6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 0.9), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5vw28"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_csd5c"]
+_data = {
+"RESET": SubResource("Animation_5vw28"),
+"new_animation": SubResource("Animation_4x3tp")
+}
+
+[node name="MenusBackground" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_wi5x7")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_s3fgu")
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+offset_left = -1280.0
+offset_top = -720.0
+offset_right = -1240.0
+offset_bottom = -680.0
+texture = ExtResource("3_8mnu0")
+
+[node name="SpriteRect4" type="Sprite2D" parent="."]
+position = Vector2(0, -7)
+texture = ExtResource("4_mq2fh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SpriteRect4"]
+libraries = {
+"": SubResource("AnimationLibrary_csd5c")
+}
+autoplay = "new_animation"
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+offset_left = -1280.0
+offset_top = -720.0
+offset_right = -1240.0
+offset_bottom = -680.0
+texture = ExtResource("5_prlc2")

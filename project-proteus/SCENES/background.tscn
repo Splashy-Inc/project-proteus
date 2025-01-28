@@ -19,6 +19,7 @@ texture = ExtResource("1_3kgct")
 
 [node name="BackMiddle" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.25, 0.25)
+scroll_offset = Vector2(0, -106)
 repeat_size = Vector2(2560, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="BackMiddle"]
@@ -27,6 +28,7 @@ offset = Vector2(0, 360)
 
 [node name="Middle" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.5, 0.5)
+scroll_offset = Vector2(0, -168)
 repeat_size = Vector2(2560, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Middle"]
@@ -35,6 +37,7 @@ offset = Vector2(0, 360)
 
 [node name="FrontMiddle" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.75, 0.75)
+scroll_offset = Vector2(0, 20)
 repeat_size = Vector2(2560, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="FrontMiddle"]
@@ -49,9 +52,11 @@ repeat_size = Vector2(2560, 0)
 texture = ExtResource("5_umm5s")
 
 [node name="Dirt" type="Parallax2D" parent="."]
+visible = false
 scroll_offset = Vector2(0, 980)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Dirt"]
+visible = false
 texture = ExtResource("6_rtocl")
