@@ -26,7 +26,8 @@ func initialize(new_length: int, new_type: Globals.LevelType, json_path: String)
 	length_tiles = new_length
 	type = new_type
 	level_data_path = json_path
-	camera.limit_right = length_tiles * Globals.TILE_SIZE.x
+	if type == Globals.LevelType.FINITE:
+		camera.limit_right = length_tiles * Globals.TILE_SIZE.x
 	
 	$LevelTileLayer.initialize(length_tiles, json_path)
 	
