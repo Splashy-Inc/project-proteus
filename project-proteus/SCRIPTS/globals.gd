@@ -31,15 +31,13 @@ const PLAYER_JUMP_HEIGHT = TILE_SIZE.y * 2
 const PLAYER_SPEED_TILES = 4
 const PLAYER_SPEED = TILE_SIZE.x * PLAYER_SPEED_TILES
 const CAMERA_MIN_X_DEFAULT = -10.0 * TILE_SIZE.x
+const MAX_LOSE_TIME_SECONDS = 10
+const LOSE_POINT_SPEED = PLAYER_SPEED / 2
+const MAX_LOSE_DISTANCE_TO_PLAYER = MAX_LOSE_TIME_SECONDS * LOSE_POINT_SPEED
 
 var camera_min_x := CAMERA_MIN_X_DEFAULT
 
 var cur_level_type: LevelType
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

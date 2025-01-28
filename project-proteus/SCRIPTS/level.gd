@@ -7,20 +7,21 @@ signal level_loss
 @export var player_scene: PackedScene
 @export var camera: Camera2D
 @export var can_lose = false
-@export var lose_point_speed_tiles_per_second := 1.0
 @export var type: Globals.LevelType
 @export var level_data_path: String
 @export var length_tiles := 0
+@export var cur_player: Player
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if type != Globals.LevelType.PRACTICE:
-		Globals.camera_min_x += lose_point_speed_tiles_per_second * Globals.TILE_SIZE.x * delta
+	if type != Globals.LevelType.PRACTICE and cur_player:
+		Globals.camera_min_x += Globals.LOSE_POINT_SPEED * delta
+		if Globals.camera_min_x < cur_player.global_position.x - Globals.MAX_LOSE_DISTANCE_TO_PLAYER:
+			Globals.camera_min_x = cur_player.global_position.x - Globals.MAX_LOSE_DISTANCE_TO_PLAYER
 
-func initialize(new_length: int, new_type: Globals.LevelType, new_lose_speed: float, json_path: String):
+func initialize(new_length: int, new_type: Globals.LevelType, json_path: String):
 	length_tiles = new_length
 	type = new_type
-	lose_point_speed_tiles_per_second = new_lose_speed
 	level_data_path = json_path
 	
 	$LevelTileLayer.initialize(length_tiles, json_path)
@@ -35,6 +36,7 @@ func _spawn_player(spawn_point: Vector2):
 			player.queue_free()
 	new_player.died.connect(_on_player_died)
 	new_player.initialize(spawn_point)
+	cur_player = new_player
 
 func _on_level_tile_layer_ready() -> void:
 	call_deferred("_spawn_player", $LevelTileLayer.start_point)

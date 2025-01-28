@@ -5,11 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://bjlgecas87uqo" path="res://SCENES/level_tile_layer.tscn" id="3_66xo7"]
 [ext_resource type="PackedScene" uid="uid://bclumrmjmufkl" path="res://SCENES/game_camera.tscn" id="4_7voon"]
 
-[node name="Level" type="Node" node_paths=PackedStringArray("camera")]
+[node name="Level" type="Node" node_paths=PackedStringArray("camera", "cur_player")]
 script = ExtResource("1_3r5q4")
 player_scene = ExtResource("2_yidkl")
 camera = NodePath("Proteus/GameCamera")
 can_lose = true
+cur_player = NodePath("Proteus")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="LevelTileLayer" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("3_66xo7")]
 z_index = 2
